@@ -4,20 +4,30 @@
 
 @layer base {
   :root {
-    --background: #FCFAF6;
+    --background: #FDFBF7;
     --foreground: #2C2523;
   }
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-cormorant), Georgia, serif;
+  background: #1C1613; /* Dark luxury backdrop for desktop viewing */
+  font-family: 'Cormorant Garamond', Georgia, serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Gold Shimmer Text Effect */
+/* Luxury Wedding Parchment Texture */
+.wedding-bg {
+  background-color: #FDFBF7;
+  background-image: 
+    radial-gradient(#DECDB6 0.75px, transparent 0.75px),
+    radial-gradient(#DECDB6 0.75px, #FDFBF7 0.75px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+/* Custom Gold Shimmer Text */
 .gold-shimmer-text {
   background: linear-gradient(110deg, #976C12 0%, #D4AF37 35%, #FFF8DC 50%, #D4AF37 65%, #976C12 100%);
   background-size: 200% auto;
@@ -33,9 +43,35 @@ body {
   }
 }
 
-/* Smooth luxury scrollbars */
+/* Floating Flower Petals Animation */
+@keyframes petalFall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(35px);
+    opacity: 0;
+  }
+}
+
+.falling-petal {
+  position: fixed;
+  top: -20px;
+  pointer-events: none;
+  z-index: 15;
+  animation: petalFall linear infinite;
+}
+
+/* Mobile-first smooth scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -49,12 +85,4 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #C4A252;
-}
-
-/* Texture overlay for luxury embossed paper feel */
-.paper-texture {
-  background-color: #FCFAF6;
-  background-image: radial-gradient(#DECDB6 0.65px, transparent 0.65px), radial-gradient(#DECDB6 0.65px, #FCFAF6 0.65px);
-  background-size: 26px 26px;
-  background-position: 0 0, 13px 13px;
 }

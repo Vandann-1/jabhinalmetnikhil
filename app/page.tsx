@@ -13,6 +13,7 @@ import RsvpSection from "@/components/RsvpSection";
 import LoveStorySection from "@/components/LoveStorySection";
 import FooterSection from "@/components/FooterSection";
 import MusicPlayer from "@/components/MusicPlayer";
+import FallingPetals from "@/components/FallingPetals";
 
 export default function Home() {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
@@ -29,24 +30,27 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen bg-[#FCFAF6] text-[#2C2523] overflow-x-hidden paper-texture">
-      {/* 1. Full-Screen Interactive Luxury 3D Embossed Wax Seal Envelope */}
+    <main className="relative min-h-screen bg-[#1C1613] flex justify-center selection:bg-gold-200 selection:text-gold-900 overflow-x-hidden">
+      
+      {/* 1. Falling Rose & Golden Petals Background Layer */}
+      <FallingPetals />
+
+      {/* 2. Interactive 3D Luxury Embossed Wax Seal Envelope Overlay */}
       <Envelope isOpen={isEnvelopeOpen} onOpen={handleOpenEnvelope} />
 
-      {/* 2. Floating Background Royal Wedding Soundtrack Player */}
+      {/* 3. Floating Background Music Player */}
       <MusicPlayer shouldPlay={startMusic} />
 
-      {/* 3. Main Experience Container - Full Desktop & Mobile Responsive */}
-      <div className="relative w-full max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 py-4 sm:py-8">
+      {/* 4. Pure Mobile-First Screen Container (Max 440px width on desktop, 100% on mobile) */}
+      <div className="w-full max-w-[440px] min-h-screen bg-[#FDFBF7] shadow-2xl relative border-x border-[#EDE2D2]/70 wedding-bg overflow-x-hidden">
         
-        {/* Subtle Decorative Side Gold Filigree Borders for Desktop (lg+) */}
-        <div className="hidden lg:block fixed left-4 top-1/2 -translate-y-1/2 w-8 h-96 border-l-2 border-gold-300/40 pointer-events-none opacity-60" />
-        <div className="hidden lg:block fixed right-4 top-1/2 -translate-y-1/2 w-8 h-96 border-r-2 border-gold-300/40 pointer-events-none opacity-60" />
+        {/* Top subtle ornamental bar */}
+        <div className="h-1.5 w-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400" />
 
-        {/* 1. Hero Cover */}
+        {/* 1. Hero Animated Video Card (Couple under Mandap with Falling Petals) */}
         <HeroInvitation />
 
-        {/* 2. Interactive Scratch to Reveal Date */}
+        {/* 2. Interactive Auto-Scratch Date Section */}
         <div id="scratch-date-section">
           <ScratchDate />
         </div>
@@ -54,7 +58,7 @@ export default function Home() {
         {/* 3. Formal Family Invitation & Lineage */}
         <InvitationText />
 
-        {/* 4. Multi-Ceremony Wedding Timeline (2-Column Alternating on Desktop, Left-Aligned on Mobile) */}
+        {/* 4. Multi-Ceremony Wedding Timeline */}
         <TimelineSection />
 
         {/* 5. Live Celebration Countdown Timer */}
