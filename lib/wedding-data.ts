@@ -299,9 +299,9 @@ export const weddingData: WeddingData = {
   },
 
   music: {
-    audioUrl: "https://assets.mixkit.co/music/preview/mixkit-indian-traditional-sitar-and-percussion-335.mp3",
-    trackTitle: "Mangal Vivah Sitar & Flute",
-    artist: "Traditional Royal Melodies",
+    audioUrl: "/audio/kudmayi-wedding-tune.mp3",
+    trackTitle: "Kudmayi (Wedding Tune) - Rocky Aur Rani",
+    artist: "Shahid Mallya & Pritam",
   },
 
   loveStory: [

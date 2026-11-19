@@ -17,6 +17,10 @@ export default function Home() {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
   const [startMusic, setStartMusic] = useState(false);
 
+  const handleStartOpen = () => {
+    setStartMusic(true);
+  };
+
   const handleOpenEnvelope = () => {
     setIsEnvelopeOpen(true);
     setStartMusic(true);
@@ -34,7 +38,11 @@ export default function Home() {
       <FallingPetals />
 
       {/* 2. Full-Screen Landing Envelope with Centered HN Monogram & #JabHinalMetNikhil Animation */}
-      <Envelope isOpen={isEnvelopeOpen} onOpen={handleOpenEnvelope} />
+      <Envelope 
+        isOpen={isEnvelopeOpen} 
+        onOpen={handleOpenEnvelope} 
+        onStartOpen={handleStartOpen} 
+      />
 
       {/* 3. Floating Background Royal Wedding Soundtrack Player */}
       <MusicPlayer shouldPlay={startMusic} />

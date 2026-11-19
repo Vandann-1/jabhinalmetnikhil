@@ -8,10 +8,11 @@ import { weddingData } from "@/lib/wedding-data";
 
 interface EnvelopeProps {
   onOpen: () => void;
+  onStartOpen?: () => void;
   isOpen: boolean;
 }
 
-export default function Envelope({ onOpen, isOpen }: EnvelopeProps) {
+export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [opening, setOpening] = useState(false);
   const [showHashtag, setShowHashtag] = useState(false);
@@ -19,6 +20,11 @@ export default function Envelope({ onOpen, isOpen }: EnvelopeProps) {
   const handleOpenClick = () => {
     if (opening || isOpen) return;
     setOpening(true);
+
+    // Trigger instant audio playback synchronously within user tap/click gesture
+    if (onStartOpen) {
+      onStartOpen();
+    }
 
     try {
       // Confetti burst of gold, rose, and white particles
