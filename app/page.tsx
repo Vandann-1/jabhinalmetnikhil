@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import Envelope from "@/components/Envelope";
+import HeaderNav from "@/components/HeaderNav";
 import HeroInvitation from "@/components/HeroInvitation";
 import ScratchDate from "@/components/ScratchDate";
 import InvitationText from "@/components/InvitationText";
 import TimelineSection from "@/components/TimelineSection";
 import CountdownTimer from "@/components/CountdownTimer";
 import VenueSection from "@/components/VenueSection";
-import RsvpSection from "@/components/RsvpSection";
 import FooterSection from "@/components/FooterSection";
 import MusicPlayer from "@/components/MusicPlayer";
 import FallingPetals from "@/components/FallingPetals";
@@ -36,11 +36,14 @@ export default function Home() {
       {/* 2. Full-Screen Landing Envelope with Centered HN Monogram & #JabHinalMetNikhil Animation */}
       <Envelope isOpen={isEnvelopeOpen} onOpen={handleOpenEnvelope} />
 
-      {/* 3. Background Royal Wedding Music */}
+      {/* 3. Floating Background Royal Wedding Soundtrack Player */}
       <MusicPlayer shouldPlay={startMusic} />
 
-      {/* 4. Minimal Editorial Mobile Layout (Zero bulky cards, pure flowing luxury) */}
-      <div className="w-full max-w-[450px] min-h-screen bg-[#FAF1E2] relative shadow-lg overflow-x-hidden p-0 m-0 border-0">
+      {/* 4. Sticky Header Navigation in Soft Pinkish Blush with #JabHinalMetNikhil */}
+      <HeaderNav />
+
+      {/* 5. Minimal Editorial Mobile Layout (Zero bulky cards, pure flowing luxury) */}
+      <div className="w-full max-w-[450px] min-h-screen bg-[#FAF1E2] relative shadow-lg overflow-x-hidden p-0 m-0 border-0 pt-10">
         
         {/* Full-bleed Seamless Video Hero */}
         <HeroInvitation />
@@ -51,7 +54,7 @@ export default function Home() {
         {/* Lineage & Family Blessings (Shri Rakeshbhai & Smt. Nitaben Darji) */}
         <InvitationText />
 
-        {/* Official 6-Ceremony Timeline (Jan 24 - 26, 2027) */}
+        {/* Official 6-Ceremony Zig-Zag Timeline (Jan 24 - 26, 2027) */}
         <TimelineSection />
 
         {/* Live Countdown Timer */}
@@ -59,9 +62,6 @@ export default function Home() {
 
         {/* Venue & Procession Route (C.K. House, Metral & Galodiya to Metral) */}
         <VenueSection />
-
-        {/* 1-Click WhatsApp RSVP */}
-        <RsvpSection />
 
         {/* Minimal Footer */}
         <FooterSection onReopenEnvelope={handleReopenEnvelope} />
