@@ -19,20 +19,19 @@ export default function Envelope({ onOpen, isOpen }: EnvelopeProps) {
     if (opening || isOpen) return;
     setOpening(true);
 
-    // Fire golden celebration confetti
     try {
       confetti({
-        particleCount: 85,
-        spread: 90,
-        origin: { y: 0.6 },
-        colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#8E1D30", "#B8860B"],
+        particleCount: 90,
+        spread: 95,
+        origin: { y: 0.55 },
+        colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#7A1424", "#FFFFFF"],
         disableForReducedMotion: true,
       });
     } catch {}
 
     setTimeout(() => {
       onOpen();
-    }, 1300);
+    }, 1200);
   };
 
   if (isOpen) {
@@ -44,126 +43,122 @@ export default function Envelope({ onOpen, isOpen }: EnvelopeProps) {
       <motion.div
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, scale: 0.98 }}
-        transition={{ duration: 0.8 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 bg-gradient-to-br from-[#120E0D]/95 via-[#231713]/95 to-[#0E0A09]/98 backdrop-blur-md overflow-hidden select-none"
+        transition={{ duration: 0.7 }}
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 bg-gradient-to-b from-[#FAF6EE] via-[#F4EDE0] to-[#EFE5D2] backdrop-blur-md overflow-hidden select-none"
       >
-        {/* Ambient atmospheric lighting */}
+        {/* Soft Warm Ambient Lighting & Floating Sparkles */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-amber-600/10 blur-3xl animate-pulse-slow" />
-          <div
-            className="absolute bottom-1/4 right-1/4 w-[420px] h-[420px] rounded-full bg-gold-400/10 blur-3xl animate-pulse-slow"
-            style={{ animationDelay: "1.8s" }}
-          />
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-gold-200/40 blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] rounded-full bg-amber-100/50 blur-3xl" />
         </div>
 
-        {/* Outer Stage Container - Full Desktop & Mobile Responsive */}
-        <div className="relative w-full max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col items-center">
+        {/* Full-Screen Stage Container */}
+        <div className="relative w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl flex flex-col items-center">
           
-          {/* Header Title Above Envelope */}
+          {/* Header Title Above White Envelope */}
           <motion.div
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-4 sm:mb-6 px-4"
+            transition={{ duration: 0.6 }}
+            className="text-center mb-3 sm:mb-5 px-4"
           >
-            <p className="text-gold-300 text-xs sm:text-sm tracking-[0.25em] uppercase font-serif mb-1 flex items-center justify-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin" style={{ animationDuration: "10s" }} />
-              A Royal Wedding Invitation
-              <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin" style={{ animationDuration: "10s" }} />
-            </p>
-            <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-serif font-light tracking-wide">
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <Sparkles className="w-3.5 h-3.5 text-gold-600 animate-spin" style={{ animationDuration: "12s" }} />
+              <p className="text-gold-800 text-xs sm:text-sm tracking-[0.25em] uppercase font-cinzel font-bold">
+                Royal Wedding Invitation
+              </p>
+              <Sparkles className="w-3.5 h-3.5 text-gold-600 animate-spin" style={{ animationDuration: "12s" }} />
+            </div>
+            <h1 className="text-stone-900 text-3xl sm:text-4xl md:text-5xl font-cinzel font-bold tracking-wide">
               {weddingData.couple.bride.firstName} & {weddingData.couple.groom.firstName}
             </h1>
           </motion.div>
 
-          {/* The Luxury Physical Envelope Container */}
+          {/* Proper Full-Size Pure White Embossed Envelope */}
           <div
             onClick={handleOpenClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             className="relative w-full aspect-[492/368] cursor-pointer group perspective-1000 max-h-[75vh]"
           >
-            {/* 3D Envelope Wrapper */}
             <motion.div
               animate={{
                 scale: isHovered && !opening ? 1.02 : 1,
                 rotateX: isHovered && !opening ? 2 : 0,
                 boxShadow: isHovered
-                  ? "0 30px 60px -15px rgba(0, 0, 0, 0.7), 0 0 35px rgba(212, 175, 55, 0.25)"
-                  : "0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.4)",
+                  ? "0 25px 50px -12px rgba(180, 140, 60, 0.35), 0 0 30px rgba(255, 255, 255, 0.8)"
+                  : "0 20px 40px -10px rgba(160, 120, 50, 0.25), 0 0 15px rgba(0, 0, 0, 0.05)",
               }}
-              transition={{ duration: 0.4 }}
-              className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#DECDB6]/70"
+              transition={{ duration: 0.35 }}
+              className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-white border-2 border-white/90 shadow-2xl"
             >
-              {/* Authentic Embossed Luxury Envelope Texture (From User's Image) */}
+              {/* Pure White Embossed Envelope Texture */}
               <img
-                src="/images/envelope-real.png"
-                alt="Luxury Embossed Envelope"
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none transition-transform duration-700"
+                src="/images/envelope-white.png"
+                alt="Pure White Luxury Embossed Envelope"
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none brightness-105"
               />
 
-              {/* Gold Shimmer Sheen Sweep Effect on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+              {/* Shimmer Light Reflection Sweep */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 
-              {/* 3D Wax Seal with User's Exact Custom HN Monogram Logo */}
-              {/* Positioned exactly at center X=50%, Y=61% where the flap tip and seal rest */}
+              {/* Centered Wax Seal with Custom Intertwined HN Monogram Directly in the Center */}
               <div
                 className="absolute top-[61%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-                style={{ width: "18%", aspectRatio: "1/1" }}
+                style={{ width: "20%", aspectRatio: "1/1" }}
               >
                 <motion.div
                   animate={{
-                    scale: opening ? [1, 1.35, 0] : isHovered ? 1.12 : [1, 1.04, 1],
+                    scale: opening ? [1, 1.4, 0] : isHovered ? 1.12 : [1, 1.04, 1],
                     boxShadow: opening
-                      ? "0 0 60px rgba(212, 175, 55, 0.95)"
+                      ? "0 0 50px rgba(212, 175, 55, 0.95)"
                       : isHovered
-                      ? "0 10px 30px rgba(184, 134, 11, 0.55), 0 0 20px rgba(212, 175, 55, 0.4)"
-                      : "0 6px 18px rgba(90, 60, 20, 0.45)",
+                      ? "0 10px 25px rgba(184, 134, 11, 0.5), 0 0 15px rgba(212, 175, 55, 0.4)"
+                      : "0 6px 16px rgba(120, 80, 20, 0.35)",
                   }}
                   transition={{
                     duration: opening ? 0.6 : isHovered ? 0.3 : 3,
                     repeat: opening || isHovered ? 0 : Infinity,
                     ease: "easeInOut",
                   }}
-                  className="relative w-full h-full rounded-full bg-gradient-to-tr from-[#6C4A11] via-[#D1A741] to-[#FFF3C2] p-[3px] sm:p-1 flex items-center justify-center shadow-seal border border-[#FFEBAA]"
+                  className="relative w-full h-full rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-1 flex items-center justify-center shadow-seal border-2 border-[#D4AF37]"
                 >
-                  {/* Wax Seal Outer Rims with Subtle Rotation */}
+                  {/* Wax Seal Outer Scallop Rim */}
                   <div
-                    className="absolute inset-0 rounded-full border border-dashed border-[#FDF2C7]/70 animate-spin"
-                    style={{ animationDuration: "30s" }}
+                    className="absolute -inset-1 rounded-full border border-dashed border-[#FFE28A]/80 animate-spin"
+                    style={{ animationDuration: "25s" }}
                   />
 
-                  {/* Wax Seal Inner Core */}
-                  <div className="w-full h-full rounded-full bg-gradient-to-br from-[#E2B958] via-[#B8861B] to-[#6E4E0D] flex items-center justify-center shadow-inner relative overflow-hidden p-2">
-                    {/* User's Exact Intertwined HN Monogram Logo */}
+                  {/* Wax Seal Core with Centered HN Monogram */}
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-[#7A1424] via-[#5C0D1A] to-[#400811] flex items-center justify-center shadow-inner relative overflow-hidden p-2">
                     <img
                       src="/images/hn-logo-gold.png"
                       alt="H & N Monogram"
-                      className="w-full h-full object-contain filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]"
+                      className="w-full h-full object-contain filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]"
                     />
                   </div>
 
-                  {/* Pulsing Golden Aura Ring */}
+                  {/* Pulsing Aura */}
                   <motion.div
-                    animate={{ scale: [1, 1.45, 1], opacity: [0.7, 0, 0.7] }}
+                    animate={{ scale: [1, 1.4, 1], opacity: [0.6, 0, 0.6] }}
                     transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
-                    className="absolute -inset-3 rounded-full border border-gold-400/60 pointer-events-none"
+                    className="absolute -inset-3 rounded-full border border-gold-400/50 pointer-events-none"
                   />
                 </motion.div>
               </div>
 
-              {/* The Inner Card Sliding Up on Opening */}
+              {/* Inner Card Gliding Upwards upon Opening */}
               <motion.div
-                initial={{ y: "40%", opacity: 0 }}
+                initial={{ y: "45%", opacity: 0 }}
                 animate={{
-                  y: opening ? "-35%" : "40%",
+                  y: opening ? "-35%" : "45%",
                   opacity: opening ? 1 : 0,
-                  scale: opening ? 1.03 : 0.95,
+                  scale: opening ? 1.02 : 0.95,
                 }}
-                transition={{ duration: 0.9, delay: 0.25 }}
-                className="absolute inset-x-6 sm:inset-x-12 top-6 bottom-6 rounded-2xl bg-gradient-to-b from-white via-[#FCFAF6] to-[#F5ECE0] shadow-2xl border-2 border-gold-300 p-6 flex flex-col items-center justify-center text-center pointer-events-none z-30"
+                transition={{ duration: 0.9, delay: 0.2 }}
+                className="absolute inset-x-6 sm:inset-x-10 top-6 bottom-6 rounded-2xl bg-white shadow-2xl border-2 border-gold-300 p-6 flex flex-col items-center justify-center text-center pointer-events-none z-30"
               >
-                <div className="text-gold-700 text-xs sm:text-sm tracking-widest font-serif font-bold mb-2">
+                <div className="text-gold-700 text-xs tracking-widest font-serif font-bold mb-1">
                   {weddingData.couple.auspiciousSymbol}
                 </div>
                 <div className="w-12 h-12 mb-2">
@@ -173,37 +168,37 @@ export default function Envelope({ onOpen, isOpen }: EnvelopeProps) {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl text-stone-900 mb-1">
+                <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-stone-900 mb-0.5">
                   {weddingData.couple.bride.firstName} & {weddingData.couple.groom.firstName}
                 </h3>
-                <p className="text-xs sm:text-sm text-gold-800 font-serif font-medium mt-1">
+                <p className="font-cinzel text-xs sm:text-sm font-bold text-[#7A1424] mt-1">
                   {weddingData.theDate.formattedDisplayDate}
                 </p>
                 <p className="text-[11px] text-stone-500 font-serif uppercase tracking-widest mt-1">
-                  {weddingData.venue.city}, Gujarat
+                  New Metral, Gujarat
                 </p>
               </motion.div>
             </motion.div>
           </div>
 
-          {/* Bottom Tap Instruction Hint */}
+          {/* Bottom Tap Prompt */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="mt-5 text-center flex flex-col items-center gap-1.5"
+            transition={{ delay: 0.25 }}
+            className="mt-4 text-center flex flex-col items-center gap-1"
           >
             <motion.div
               animate={{ y: [0, 4, 0] }}
               transition={{ duration: 1.8, repeat: Infinity }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-gold-400/40 text-gold-200 text-xs sm:text-sm font-serif cursor-pointer shadow-md"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 hover:bg-white border-2 border-gold-400 text-stone-800 text-xs sm:text-sm font-serif font-semibold shadow-md cursor-pointer transition-all"
               onClick={handleOpenClick}
             >
-              <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400 animate-pulse" />
-              <span>Tap the golden wax seal to unseal invitation</span>
+              <Heart className="w-3.5 h-3.5 text-rose-600 fill-rose-600 animate-pulse" />
+              <span>Tap the wax seal to open invitation</span>
             </motion.div>
-            <span className="text-gold-400/70 text-[11px] font-serif tracking-widest">
-              {weddingData.couple.hashtag} • Sound will play
+            <span className="text-stone-500 text-[11px] font-serif tracking-widest">
+              {weddingData.couple.hashtag}
             </span>
           </motion.div>
 

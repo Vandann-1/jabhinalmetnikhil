@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Sparkles, CheckCircle2, RotateCcw, CalendarCheck2 } from "lucide-react";
+import { Sparkles, CheckCircle2, RotateCcw, Calendar, Check } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
 
 interface ScratchCanvasProps {
@@ -49,17 +49,17 @@ function ScratchCard({
     ctx.fillRect(0, 0, width, height);
 
     // Elegant dual metallic border
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.75)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
     ctx.lineWidth = 4;
     ctx.strokeRect(8, 8, width - 16, height - 16);
 
-    ctx.strokeStyle = "rgba(120, 85, 20, 0.4)";
+    ctx.strokeStyle = "rgba(120, 85, 20, 0.45)";
     ctx.lineWidth = 1.5;
-    ctx.strokeRect(12, 12, width - 24, height - 24);
+    ctx.strokeRect(13, 13, width - 26, height - 26);
 
     // Text on scratch foil
     ctx.fillStyle = "#4A350E";
-    ctx.font = "bold 15px 'Cinzel', serif, sans-serif";
+    ctx.font = "bold 16px 'Cinzel', serif, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText("✦ SCRATCH ✦", width / 2, height / 2 - 12);
@@ -73,7 +73,7 @@ function ScratchCard({
     initCanvas();
   }, [initCanvas]);
 
-  const scratch = (x: number, y: number, radius = 24) => {
+  const scratch = (x: number, y: number, radius = 26) => {
     const canvas = canvasRef.current;
     if (!canvas || isScratched) return;
     const ctx = canvas.getContext("2d");
@@ -132,7 +132,7 @@ function ScratchCard({
       const y = progress * height;
       const x = (Math.sin(progress * Math.PI * 4) * 0.42 + 0.5) * width;
 
-      scratch(x, y, 28);
+      scratch(x, y, 30);
 
       if (step >= totalSteps) {
         clearInterval(interval);
@@ -169,26 +169,26 @@ function ScratchCard({
 
   return (
     <div className="flex flex-col items-center">
-      {/* High-Definition Responsive Card */}
-      <div className="relative w-[105px] h-[125px] sm:w-[115px] sm:h-[135px] rounded-2xl bg-gradient-to-b from-white via-[#FFFDF9] to-[#F8F1E4] shadow-md border-2 border-gold-400/80 p-2.5 flex flex-col items-center justify-center overflow-hidden group select-none">
+      {/* High-Definition Pure White Card */}
+      <div className="relative w-[110px] h-[135px] sm:w-[125px] sm:h-[145px] rounded-2xl bg-white shadow-lg border-2 border-gold-400 p-2 flex flex-col items-center justify-center overflow-hidden group select-none">
         
-        {/* Revealed Content: Ultra-Clean, Proper, Bold Font */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center pointer-events-none">
-          <span className="text-stone-400 text-[10px] uppercase tracking-wider font-sans font-semibold">
+        {/* Revealed Content: Ultra-Clean, Bold, Proper 26 January */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center pointer-events-none bg-white">
+          <span className="text-stone-400 text-[10px] uppercase tracking-widest font-sans font-bold mb-0.5">
             {label}
           </span>
 
           {/* Large, Clear, Regal Number / Month */}
-          <span className="font-cinzel text-3xl sm:text-4xl font-extrabold text-[#7A1424] tracking-tight my-0.5 drop-shadow-[0_1px_1px_rgba(0,0,0,0.15)] leading-none">
+          <span className="font-cinzel text-4xl sm:text-5xl font-black text-[#7A1424] tracking-tight my-0.5 drop-shadow-[0_1px_1px_rgba(0,0,0,0.12)] leading-none">
             {revealedValue}
           </span>
 
           {subLabel ? (
-            <span className="text-[10px] text-gold-800 font-serif font-bold italic tracking-wider">
+            <span className="text-[11px] text-gold-800 font-cinzel font-bold tracking-wider mt-1">
               {subLabel}
             </span>
           ) : (
-            <span className="text-[9px] text-stone-500 uppercase tracking-widest font-sans font-medium">
+            <span className="text-[10px] text-stone-500 uppercase tracking-widest font-sans font-semibold mt-1">
               2027
             </span>
           )}
@@ -197,18 +197,18 @@ function ScratchCard({
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className="absolute top-1.5 right-1.5"
+              className="absolute top-2 right-2"
             >
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
             </motion.div>
           )}
         </div>
 
-        {/* Scratchable Canvas Layer (High-Resolution 2x scale for retina crispness) */}
+        {/* Scratchable Canvas Layer (2x scale for retina crispness) */}
         <canvas
           ref={canvasRef}
-          width={220}
-          height={260}
+          width={240}
+          height={280}
           onMouseDown={(e) => handlePointerDown(e.clientX, e.clientY)}
           onMouseMove={(e) => handlePointerMove(e.clientX, e.clientY)}
           onMouseUp={() => { isDrawing.current = false; }}
@@ -226,7 +226,7 @@ function ScratchCard({
         />
       </div>
 
-      <span className="mt-1.5 text-xs font-cinzel font-bold text-stone-700 uppercase tracking-widest">
+      <span className="mt-1.5 text-xs font-cinzel font-bold text-stone-800 uppercase tracking-widest">
         {label}
       </span>
     </div>
@@ -251,7 +251,7 @@ export default function ScratchDate() {
           setTimeout(() => setActiveAutoCard(2), 2600); // Card 3 (2027)
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.25 }
     );
 
     if (sectionRef.current) {
@@ -268,10 +268,10 @@ export default function ScratchDate() {
         hasCelebrated.current = true;
         try {
           confetti({
-            particleCount: 85,
-            spread: 90,
+            particleCount: 90,
+            spread: 95,
             origin: { y: 0.65 },
-            colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#8B1D2C"],
+            colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#7A1424"],
           });
         } catch {}
       }
@@ -291,35 +291,62 @@ export default function ScratchDate() {
   const { day, month, year, label } = weddingData.theDate.scratchCard;
 
   return (
-    <section ref={sectionRef} className="relative py-10 px-4 text-center bg-[#FAF1E2]">
+    <section ref={sectionRef} className="relative py-12 px-4 text-center bg-[#FAF1E2]">
       
       {/* Decorative Ribbon Header */}
       <div className="flex items-center justify-center gap-3 mb-1">
-        <div className="h-[1px] w-10 bg-gold-400" />
-        <span className="text-gold-700 font-script text-2xl">Auspicious Celebration</span>
-        <div className="h-[1px] w-10 bg-gold-400" />
+        <div className="h-[1px] w-12 bg-gold-400" />
+        <span className="text-gold-700 font-script text-2xl">Auspicious Wedding Date</span>
+        <div className="h-[1px] w-12 bg-gold-400" />
       </div>
 
-      <h2 className="text-3xl font-cinzel font-bold text-stone-900 tracking-wide mb-1">
-        Save The Date
+      <h2 className="text-3xl font-cinzel font-black text-stone-900 tracking-wide mb-3">
+        SAVE THE DATE
       </h2>
 
-      {/* Prominent Crystal-Clear Date Banner (As requested: 26 January in clear clean proper font!) */}
-      <div className="my-3 px-4 py-2 rounded-2xl bg-white/95 border-2 border-gold-300 shadow-sm inline-flex items-center gap-2">
-        <CalendarCheck2 className="w-4 h-4 text-[#8B1D2C] shrink-0" />
-        <span className="font-cinzel text-sm sm:text-base font-extrabold text-[#7A1424] tracking-wide">
-          Tuesday, 26th January 2027
+      {/* Prominent Crystal-Clear 26 JANUARY 2027 Card (As requested: Bold, Clear, Proper & Beautiful!) */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        className="w-full max-w-[360px] mx-auto my-4 p-5 rounded-3xl bg-white border-2 border-gold-400 shadow-luxury flex flex-col items-center justify-center text-center"
+      >
+        <span className="text-[11px] font-sans font-bold uppercase tracking-[0.25em] text-gold-800 mb-1">
+          ✦ Auspicious Muhurat ✦
         </span>
-      </div>
 
-      <p className="text-gold-800 text-xs font-serif tracking-widest mt-1 mb-5 flex items-center justify-center gap-1.5 font-medium">
+        {/* 26 JANUARY Grand Display */}
+        <div className="my-1 flex items-baseline justify-center gap-3">
+          <span className="font-cinzel text-6xl sm:text-7xl font-black text-[#7A1424] tracking-tight leading-none drop-shadow-sm">
+            26
+          </span>
+          <div className="text-left flex flex-col justify-center">
+            <span className="font-cinzel text-2xl sm:text-3xl font-black text-[#7A1424] tracking-wider leading-none">
+              JANUARY
+            </span>
+            <span className="font-cinzel text-sm sm:text-base font-bold text-stone-800 tracking-widest mt-1">
+              2027 • TUESDAY
+            </span>
+          </div>
+        </div>
+
+        {/* Wedding Procession Route Summary under date */}
+        <div className="mt-3 pt-3 border-t border-gold-200/80 w-full text-center">
+          <p className="text-[11px] font-serif text-stone-600 font-medium">
+            Wedding Procession from <span className="font-bold text-stone-900">Galodiya</span> to <span className="font-bold text-stone-900">Metral</span>
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Scratch Instruction Prompt */}
+      <p className="text-gold-800 text-xs font-serif tracking-widest mt-3 mb-5 flex items-center justify-center gap-1.5 font-semibold">
         <Sparkles className="w-3.5 h-3.5 text-gold-500 animate-pulse" />
         {label}
         <Sparkles className="w-3.5 h-3.5 text-gold-500 animate-pulse" />
       </p>
 
-      {/* The 3 Scratch Cards in a Row: 26 | JANUARY | 2027 */}
-      <div className="flex items-center justify-center gap-2.5 sm:gap-3.5 mb-4">
+      {/* The 3 Scratch Cards: 26 | JANUARY | 2027 */}
+      <div className="flex items-center justify-center gap-3 sm:gap-4 mb-4">
         <ScratchCard
           label="Day"
           revealedValue={day}
@@ -349,7 +376,7 @@ export default function ScratchDate() {
             animate={{ opacity: 1, scale: 1 }}
             className="flex items-center gap-2"
           >
-            <span className="text-xs font-cinzel text-[#7A1424] bg-white/90 px-4 py-1.5 rounded-full border border-gold-300 font-bold shadow-sm">
+            <span className="text-xs font-cinzel text-[#7A1424] bg-white px-4 py-1.5 rounded-full border border-gold-300 font-bold shadow-sm">
               ✨ 26th January 2027 Revealed ✨
             </span>
             <button
