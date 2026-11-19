@@ -18,14 +18,14 @@ export default function VenueSection() {
       <div className="text-center mb-6">
         <div className="flex items-center justify-center gap-3 mb-1">
           <div className="h-[1px] w-8 bg-gold-400" />
-          <span className="text-gold-600 font-script text-2xl">The Destination</span>
+          <span className="text-gold-600 font-script text-2xl">Venue & Location</span>
           <div className="h-[1px] w-8 bg-gold-400" />
         </div>
         <h2 className="text-2xl font-serif text-stone-800 tracking-wide font-normal">
-          Location & Venue
+          Residence & Celebration
         </h2>
         <p className="text-gold-700 text-xs font-serif uppercase tracking-widest mt-0.5">
-          {venue.city}, {venue.state}
+          {venue.city}, {venue.district}
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export default function VenueSection() {
           <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent" />
           <div className="absolute bottom-3 left-4 right-4 text-white">
             <span className="text-[10px] uppercase tracking-widest text-gold-300 font-serif block font-medium">
-              {venue.hall}
+              Family Residence & Venue
             </span>
             <h3 className="text-lg font-serif font-light text-white">
               {venue.name}
@@ -62,13 +62,24 @@ export default function VenueSection() {
               <MapPin className="w-4 h-4" />
             </div>
             <div>
-              <h4 className="font-serif text-base text-stone-900 font-medium">
+              <h4 className="font-serif text-base text-stone-900 font-bold">
                 {venue.name}
               </h4>
               <p className="text-xs text-stone-600 font-serif leading-relaxed mt-0.5">
                 {venue.fullAddress}
               </p>
             </div>
+          </div>
+
+          {/* Procession Route Highlight Card */}
+          <div className="mb-4 p-3 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-left">
+            <span className="text-[10px] uppercase tracking-wider font-serif text-amber-800 font-bold block mb-1">
+              ✦ Wedding Procession Route ✦
+            </span>
+            <p className="text-xs font-serif text-stone-800 font-medium flex items-center gap-1.5">
+              <Navigation className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+              <span>{venue.processionRoute}</span>
+            </p>
           </div>
 
           {/* Map Preview Card with Floating 'Open in Maps' Button */}
