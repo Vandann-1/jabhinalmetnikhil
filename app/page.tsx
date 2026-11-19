@@ -28,44 +28,42 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen bg-white wedding-bg text-[#2C2523] flex justify-center selection:bg-gold-200 selection:text-gold-900 overflow-x-hidden">
+    <main className="relative min-h-screen bg-[#FAF1E2] text-[#2C2523] flex justify-center selection:bg-gold-200 selection:text-gold-900 overflow-x-hidden">
       
-      {/* 1. Falling Rose & Golden Petals Background Layer */}
+      {/* 1. Falling Petals Ambient Background */}
       <FallingPetals />
 
-      {/* 2. Full-Screen Pure White Luxury Embossed Wax Seal Envelope with Centered HN Monogram */}
+      {/* 2. Full-Screen Landing Envelope with Centered HN Monogram & #JabHinalMetNikhil Animation */}
       <Envelope isOpen={isEnvelopeOpen} onOpen={handleOpenEnvelope} />
 
-      {/* 3. Floating Background Royal Wedding Soundtrack Player */}
+      {/* 3. Background Royal Wedding Music */}
       <MusicPlayer shouldPlay={startMusic} />
 
-      {/* 4. Pure Clean Mobile-First Container (Seamless White Paper Texture, Flush Full-Bleed Video) */}
-      <div className="w-full max-w-[450px] min-h-screen bg-white wedding-bg relative shadow-2xl overflow-x-hidden p-0 m-0 border-0">
+      {/* 4. Minimal Editorial Mobile Layout (Zero bulky cards, pure flowing luxury) */}
+      <div className="w-full max-w-[450px] min-h-screen bg-[#FAF1E2] relative shadow-lg overflow-x-hidden p-0 m-0 border-0">
         
-        {/* 1. Hero Animated Video - Full-Screen Width, No Borders, Seamlessly Integrated */}
+        {/* Full-bleed Seamless Video Hero */}
         <HeroInvitation />
 
-        {/* 2. Ultra-Clear 26 January 2027 Date Display & Auto-Scratch Cards */}
-        <div id="scratch-date-section">
-          <ScratchDate />
-        </div>
+        {/* Auspicious Muhurat & Save The Date (26 January 2027) */}
+        <ScratchDate />
 
-        {/* 3. Formal Family Invitation & Lineage (Shri Rakeshbhai & Smt. Nitaben Darji, C.K. House, સ્નેહાધીન) */}
+        {/* Lineage & Family Blessings (Shri Rakeshbhai & Smt. Nitaben Darji) */}
         <InvitationText />
 
-        {/* 4. Official 6-Ceremony Wedding Timeline (Jan 24 - 26, 2027) */}
+        {/* Official 6-Ceremony Timeline (Jan 24 - 26, 2027) */}
         <TimelineSection />
 
-        {/* 5. Live Celebration Countdown Timer to 26th January 2027 */}
+        {/* Live Countdown Timer */}
         <CountdownTimer />
 
-        {/* 6. Venue & Procession Route (C.K. House, Metral & Galodiya to Metral) */}
+        {/* Venue & Procession Route (C.K. House, Metral & Galodiya to Metral) */}
         <VenueSection />
 
-        {/* 7. Interactive RSVP & Instant WhatsApp Confirmation */}
+        {/* 1-Click WhatsApp RSVP */}
         <RsvpSection />
 
-        {/* 8. Footer with Share & Re-seal Action */}
+        {/* Minimal Footer */}
         <FooterSection onReopenEnvelope={handleReopenEnvelope} />
       </div>
     </main>

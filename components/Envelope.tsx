@@ -14,24 +14,30 @@ interface EnvelopeProps {
 export default function Envelope({ onOpen, isOpen }: EnvelopeProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [opening, setOpening] = useState(false);
+  const [showHashtag, setShowHashtag] = useState(false);
 
   const handleOpenClick = () => {
     if (opening || isOpen) return;
     setOpening(true);
 
     try {
+      // Confetti burst of gold, rose, and white particles
       confetti({
-        particleCount: 100,
+        particleCount: 110,
         spread: 100,
-        origin: { y: 0.52 },
+        origin: { y: 0.5 },
         colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#7A1424", "#FFFFFF"],
         disableForReducedMotion: true,
       });
     } catch {}
 
+    // Show the #JabHinalMetNikhil cinematic background animation immediately
+    setShowHashtag(true);
+
+    // After animation finishes, transition to the main page
     setTimeout(() => {
       onOpen();
-    }, 1200);
+    }, 2000);
   };
 
   if (isOpen) {
@@ -43,162 +49,226 @@ export default function Envelope({ onOpen, isOpen }: EnvelopeProps) {
       <motion.div
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, scale: 0.98 }}
-        transition={{ duration: 0.7 }}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-between py-6 px-3 sm:px-6 bg-white wedding-bg overflow-hidden select-none"
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        className="fixed inset-0 z-50 flex flex-col items-center justify-between envelope-paper-bg overflow-hidden select-none"
       >
-        {/* Soft Warm Ambient Lighting */}
+        {/* Soft Ambient Radiance */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[550px] rounded-full bg-gold-200/30 blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] rounded-full bg-gold-200/25 blur-3xl" />
         </div>
 
-        {/* Top Header: Royal Invitation */}
+        {/* --- Top Envelope Flap (Subtle shape of envelope reaching center) --- */}
         <motion.div
-          initial={{ opacity: 0, y: -15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center z-10 pt-2"
+          animate={{
+            y: opening ? "-105%" : "0%",
+            opacity: opening ? 0.3 : 1,
+          }}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-x-0 top-0 h-[50vh] pointer-events-none z-10 overflow-hidden"
         >
-          <div className="flex items-center justify-center gap-2 mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-gold-600 animate-spin" style={{ animationDuration: "12s" }} />
-            <p className="text-gold-800 text-xs sm:text-sm tracking-[0.25em] uppercase font-cinzel font-bold">
-              Royal Wedding Invitation
-            </p>
-            <Sparkles className="w-3.5 h-3.5 text-gold-600 animate-spin" style={{ animationDuration: "12s" }} />
+          {/* Triangular / Scalloped Envelope Flap Canvas */}
+          <svg
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            className="w-full h-full filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.08)]"
+          >
+            {/* Flap Body */}
+            <path
+              d="M 0 0 L 100 0 L 100 20 Q 75 40 50 100 Q 25 40 0 20 Z"
+              fill="#FFFFFF"
+              stroke="rgba(212, 175, 55, 0.35)"
+              strokeWidth="0.5"
+            />
+            {/* Embossed Flourish Lines on Flap */}
+            <path
+              d="M 10 0 Q 30 25 50 92 Q 70 25 90 0"
+              fill="none"
+              stroke="rgba(212, 175, 55, 0.25)"
+              strokeWidth="0.4"
+              strokeDasharray="1, 1"
+            />
+            <path
+              d="M 20 0 Q 35 20 50 82 Q 65 20 80 0"
+              fill="none"
+              stroke="rgba(212, 175, 55, 0.2)"
+              strokeWidth="0.3"
+            />
+          </svg>
+
+          {/* Ornate Scalloped Lace Border at the Flap Edge */}
+          <div className="absolute bottom-0 inset-x-0 flex items-center justify-center -mb-2">
+            <div className="w-20 h-6 bg-gradient-to-b from-white to-stone-50 rounded-b-full border-b border-gold-300/60 shadow-sm" />
           </div>
-          <h1 className="text-stone-900 text-3xl sm:text-4xl md:text-5xl font-cinzel font-bold tracking-wide">
+        </motion.div>
+
+        {/* --- Top Header Details on Screen --- */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: opening ? 0 : 1, y: opening ? -30 : 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative z-20 pt-8 sm:pt-12 text-center px-4"
+        >
+          <div className="inline-flex items-center justify-center gap-2 mb-1.5 px-3 py-1 rounded-full bg-white/80 border border-gold-300/80 shadow-sm">
+            <Sparkles className="w-3 h-3 text-gold-600 animate-spin" style={{ animationDuration: "14s" }} />
+            <span className="text-gold-900 text-[10px] sm:text-xs tracking-[0.25em] uppercase font-cinzel font-bold">
+              The Wedding Celebration
+            </span>
+            <Sparkles className="w-3 h-3 text-gold-600 animate-spin" style={{ animationDuration: "14s" }} />
+          </div>
+          <h1 className="text-stone-900 text-3xl sm:text-4xl md:text-5xl font-cinzel font-black tracking-wide drop-shadow-sm">
             {weddingData.couple.bride.firstName} & {weddingData.couple.groom.firstName}
           </h1>
         </motion.div>
 
-        {/* Proper Full-Size Screen Pure White Luxury Embossed Envelope */}
-        <div className="relative w-full max-w-[420px] flex-1 flex items-center justify-center my-auto z-10">
+        {/* --- Center: The Intertwined HN Monogram Seal --- */}
+        <div className="relative z-30 flex flex-col items-center justify-center my-auto">
+          
           <div
             onClick={handleOpenClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="relative w-full aspect-[492/375] cursor-pointer group perspective-1000"
+            className="cursor-pointer group relative"
           >
+            {/* The Majestic Wax Seal Container */}
             <motion.div
               animate={{
-                scale: isHovered && !opening ? 1.02 : 1,
-                rotateX: isHovered && !opening ? 2 : 0,
-                boxShadow: isHovered
-                  ? "0 30px 60px -15px rgba(180, 140, 60, 0.4), 0 0 40px rgba(255, 255, 255, 0.9)"
-                  : "0 20px 45px -10px rgba(140, 110, 40, 0.28), 0 0 20px rgba(0, 0, 0, 0.04)",
+                scale: opening ? [1, 1.4, 0] : isHovered ? 1.12 : [1, 1.05, 1],
+                boxShadow: opening
+                  ? "0 0 70px rgba(212, 175, 55, 1)"
+                  : isHovered
+                  ? "0 15px 35px rgba(184, 134, 11, 0.6), 0 0 25px rgba(212, 175, 55, 0.5)"
+                  : "0 10px 25px rgba(120, 80, 20, 0.35)",
               }}
-              transition={{ duration: 0.35 }}
-              className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-white border-2 border-stone-200/90 shadow-2xl"
+              transition={{
+                duration: opening ? 0.7 : isHovered ? 0.3 : 3,
+                repeat: opening || isHovered ? 0 : Infinity,
+                ease: "easeInOut",
+              }}
+              className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-1.5 flex items-center justify-center border-2 border-[#D4AF37] shadow-2xl"
             >
-              {/* Pure White Embossed Envelope Texture */}
-              <img
-                src="/images/envelope-white.png"
-                alt="Pure White Luxury Embossed Envelope"
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none brightness-105"
+              {/* Outer Dashed Gold Ring */}
+              <div
+                className="absolute -inset-1.5 rounded-full border border-dashed border-[#FFE28A]/80 animate-spin"
+                style={{ animationDuration: "25s" }}
               />
 
-              {/* Shimmer Light Reflection Sweep */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
-
-              {/* Centered Wax Seal with Custom Intertwined HN Monogram Directly in the Center */}
-              <div
-                className="absolute top-[70%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-                style={{ width: "24%", aspectRatio: "1/1" }}
-              >
-                <motion.div
-                  animate={{
-                    scale: opening ? [1, 1.45, 0] : isHovered ? 1.12 : [1, 1.05, 1],
-                    boxShadow: opening
-                      ? "0 0 60px rgba(212, 175, 55, 1)"
-                      : isHovered
-                      ? "0 12px 30px rgba(184, 134, 11, 0.6), 0 0 20px rgba(212, 175, 55, 0.5)"
-                      : "0 8px 20px rgba(120, 80, 20, 0.35)",
-                  }}
-                  transition={{
-                    duration: opening ? 0.6 : isHovered ? 0.3 : 3,
-                    repeat: opening || isHovered ? 0 : Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="relative w-full h-full rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-1 flex items-center justify-center shadow-seal border-2 border-[#D4AF37]"
-                >
-                  {/* Wax Seal Outer Scallop Rim */}
-                  <div
-                    className="absolute -inset-1 rounded-full border border-dashed border-[#FFE28A]/80 animate-spin"
-                    style={{ animationDuration: "25s" }}
-                  />
-
-                  {/* Wax Seal Core with Centered HN Monogram from User Image */}
-                  <div className="w-full h-full rounded-full bg-gradient-to-br from-[#7A1424] via-[#5C0D1A] to-[#400811] flex items-center justify-center shadow-inner relative overflow-hidden p-1.5">
-                    <img
-                      src="/images/hn-logo-gold.png"
-                      alt="H & N Monogram"
-                      className="w-full h-full object-contain filter drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-                    />
-                  </div>
-
-                  {/* Pulsing Aura */}
-                  <motion.div
-                    animate={{ scale: [1, 1.4, 1], opacity: [0.6, 0, 0.6] }}
-                    transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
-                    className="absolute -inset-3 rounded-full border border-gold-400/50 pointer-events-none"
-                  />
-                </motion.div>
+              {/* Seal Inner Core: Features the user's exact intertwined HN Monogram */}
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-[#7A1424] via-[#5C0D1A] to-[#3B0710] flex items-center justify-center p-2 shadow-inner relative overflow-hidden">
+                <img
+                  src="/images/hn-logo-gold.png"
+                  alt="H & N Monogram"
+                  className="w-full h-full object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                />
               </div>
 
-              {/* Inner Card Gliding Upwards upon Opening */}
+              {/* Gentle Pulsing Golden Aura */}
               <motion.div
-                initial={{ y: "45%", opacity: 0 }}
-                animate={{
-                  y: opening ? "-35%" : "45%",
-                  opacity: opening ? 1 : 0,
-                  scale: opening ? 1.02 : 0.95,
-                }}
-                transition={{ duration: 0.9, delay: 0.2 }}
-                className="absolute inset-x-5 sm:inset-x-8 top-5 bottom-5 rounded-2xl bg-white shadow-2xl border-2 border-gold-400 p-6 flex flex-col items-center justify-center text-center pointer-events-none z-30"
+                animate={{ scale: [1, 1.35, 1], opacity: [0.6, 0, 0.6] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+                className="absolute -inset-4 rounded-full border border-gold-400/60 pointer-events-none"
+              />
+            </motion.div>
+          </div>
+
+          {/* Tap Prompt Under Seal */}
+          <motion.div
+            animate={{
+              opacity: opening ? 0 : 1,
+              y: opening ? 15 : [0, 4, 0],
+            }}
+            transition={{
+              y: { duration: 1.8, repeat: Infinity, ease: "easeInOut" },
+              opacity: { duration: 0.3 },
+            }}
+            onClick={handleOpenClick}
+            className="mt-5 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white hover:bg-gold-50 border-2 border-gold-400 text-stone-800 text-xs sm:text-sm font-serif font-bold shadow-md cursor-pointer transition-all"
+          >
+            <Heart className="w-3.5 h-3.5 text-[#7A1424] fill-[#7A1424] animate-pulse" />
+            <span>Tap the HN Monogram to Open</span>
+          </motion.div>
+
+        </div>
+
+        {/* --- Bottom Footer on Envelope Screen --- */}
+        <motion.div
+          animate={{ opacity: opening ? 0 : 1 }}
+          transition={{ duration: 0.4 }}
+          className="relative z-20 pb-8 sm:pb-10 text-center"
+        >
+          <p className="text-xs font-cinzel font-bold text-gold-900 tracking-[0.2em] uppercase">
+            Tuesday, 26th January 2027
+          </p>
+          <p className="text-[11px] text-stone-500 font-serif tracking-widest mt-0.5">
+            New Metral, Gujarat
+          </p>
+        </motion.div>
+
+        {/* --- Grand Cinematic Animation of #JabHinalMetNikhil (Appears on click in background/center) --- */}
+        <AnimatePresence>
+          {showHashtag && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-white/95 backdrop-blur-sm p-6 text-center"
+            >
+              {/* Auspicious Emblem */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+                className="w-16 h-16 mb-4 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-1 border-2 border-gold-400 shadow-xl"
               >
-                <div className="text-gold-700 text-xs tracking-widest font-serif font-bold mb-1">
-                  {weddingData.couple.auspiciousSymbol}
-                </div>
-                <div className="w-14 h-14 mb-2">
+                <div className="w-full h-full rounded-full bg-gradient-to-br from-[#7A1424] via-[#5C0D1A] to-[#3B0710] flex items-center justify-center p-2">
                   <img
-                    src="/images/hn-logo-burgundy.png"
-                    alt="HN Monogram"
+                    src="/images/hn-logo-gold.png"
+                    alt="HN"
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-stone-900 mb-0.5">
-                  {weddingData.couple.bride.firstName} & {weddingData.couple.groom.firstName}
-                </h3>
-                <p className="font-cinzel text-xs sm:text-sm font-bold text-[#7A1424] mt-1">
-                  {weddingData.theDate.formattedDisplayDate}
-                </p>
-                <p className="text-[11px] text-stone-500 font-serif uppercase tracking-widest mt-1">
-                  New Metral, Gujarat
-                </p>
               </motion.div>
-            </motion.div>
-          </div>
-        </div>
 
-        {/* Bottom Tap Prompt */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.25 }}
-          className="text-center flex flex-col items-center gap-1.5 pb-2 z-10"
-        >
-          <motion.div
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity }}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-gold-50 border-2 border-gold-400 text-stone-800 text-xs sm:text-sm font-serif font-bold shadow-lg cursor-pointer transition-all"
-            onClick={handleOpenClick}
-          >
-            <Heart className="w-4 h-4 text-[#7A1424] fill-[#7A1424] animate-pulse" />
-            <span>Tap the HN Seal to Open Invitation</span>
-          </motion.div>
-          <span className="text-stone-500 text-[11px] font-serif tracking-widest">
-            {weddingData.couple.hashtag}
-          </span>
-        </motion.div>
+              {/* Glowing Grand Hashtag: #JabHinalMetNikhil */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25, duration: 0.7 }}
+                className="relative"
+              >
+                <span className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#7A1424] via-[#B8860B] to-[#7A1424] tracking-tight drop-shadow-md">
+                  #JabHinalMetNikhil
+                </span>
+                
+                {/* Golden Shimmer Underline */}
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ delay: 0.45, duration: 0.8 }}
+                  className="h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mt-3"
+                />
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="font-serif italic text-sm sm:text-base text-stone-700 mt-4 max-w-xs"
+              >
+                A love story blessed by divine grace & sacred traditions
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+                className="font-cinzel text-xs uppercase tracking-[0.25em] text-gold-800 font-bold mt-2"
+              >
+                26th January 2027 • New Metral
+              </motion.p>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </motion.div>
     </AnimatePresence>

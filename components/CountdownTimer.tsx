@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Sparkles } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
 
 interface TimeLeft {
@@ -54,84 +53,61 @@ export default function CountdownTimer() {
 
   return (
     <section className="relative py-10 px-4 text-center">
-      {/* Title */}
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
       >
-        <span className="font-script text-2xl text-gold-600 block mb-1">
-          The Celebration Begins
-        </span>
-        <h2 className="text-xl font-serif text-stone-800 tracking-wide font-normal mb-6">
+        <span className="text-gold-700 font-cinzel text-xs tracking-[0.25em] uppercase font-bold block mb-1">
           Counting Down Every Moment
-        </h2>
-      </motion.div>
+        </span>
 
-      {/* Countdown Card Display */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="rounded-3xl bg-white border-2 border-gold-300 p-6 shadow-luxury"
-      >
-        {/* Ticker Row */}
-        <div className="flex items-center justify-center gap-1.5 sm:gap-3">
+        {/* Minimal Numbers Row — NO CARDS */}
+        <div className="flex items-center justify-center gap-2 sm:gap-4 my-3">
           
-          {/* Days */}
-          <div className="flex flex-col items-center min-w-[55px]">
-            <span className="font-serif text-3xl font-light text-stone-900 tracking-tight">
+          <div className="flex flex-col items-center min-w-[50px]">
+            <span className="font-cinzel text-4xl sm:text-5xl font-black text-[#7A1424] leading-none">
               {mounted ? timeLeft.days : "00"}
             </span>
-            <span className="text-[10px] uppercase tracking-widest text-gold-700 font-semibold mt-0.5">
+            <span className="text-[10px] uppercase tracking-widest text-stone-600 font-serif font-bold mt-1">
               Days
             </span>
           </div>
 
-          <span className="font-serif text-2xl text-gold-500 -mt-3">:</span>
+          <span className="font-cinzel text-2xl text-gold-500 -mt-3">:</span>
 
-          {/* Hours */}
-          <div className="flex flex-col items-center min-w-[55px]">
-            <span className="font-serif text-3xl font-light text-stone-900 tracking-tight">
+          <div className="flex flex-col items-center min-w-[50px]">
+            <span className="font-cinzel text-4xl sm:text-5xl font-black text-[#7A1424] leading-none">
               {mounted ? formatNumber(timeLeft.hours) : "00"}
             </span>
-            <span className="text-[10px] uppercase tracking-widest text-gold-700 font-semibold mt-0.5">
+            <span className="text-[10px] uppercase tracking-widest text-stone-600 font-serif font-bold mt-1">
               Hours
             </span>
           </div>
 
-          <span className="font-serif text-2xl text-gold-500 -mt-3">:</span>
+          <span className="font-cinzel text-2xl text-gold-500 -mt-3">:</span>
 
-          {/* Minutes */}
-          <div className="flex flex-col items-center min-w-[55px]">
-            <span className="font-serif text-3xl font-light text-stone-900 tracking-tight">
+          <div className="flex flex-col items-center min-w-[50px]">
+            <span className="font-cinzel text-4xl sm:text-5xl font-black text-[#7A1424] leading-none">
               {mounted ? formatNumber(timeLeft.minutes) : "00"}
             </span>
-            <span className="text-[10px] uppercase tracking-widest text-gold-700 font-semibold mt-0.5">
-              Minutes
+            <span className="text-[10px] uppercase tracking-widest text-stone-600 font-serif font-bold mt-1">
+              Mins
             </span>
           </div>
 
-          <span className="font-serif text-2xl text-gold-500 -mt-3">:</span>
+          <span className="font-cinzel text-2xl text-gold-500 -mt-3">:</span>
 
-          {/* Seconds */}
-          <div className="flex flex-col items-center min-w-[55px]">
-            <span className="font-serif text-3xl font-light text-gold-600 tracking-tight">
+          <div className="flex flex-col items-center min-w-[50px]">
+            <span className="font-cinzel text-4xl sm:text-5xl font-black text-[#7A1424] leading-none">
               {mounted ? formatNumber(timeLeft.seconds) : "00"}
             </span>
-            <span className="text-[10px] uppercase tracking-widest text-gold-700 font-semibold mt-0.5">
-              Seconds
+            <span className="text-[10px] uppercase tracking-widest text-stone-600 font-serif font-bold mt-1">
+              Secs
             </span>
           </div>
-        </div>
 
-        {/* Footer info in countdown */}
-        <div className="mt-4 pt-3 border-t border-gold-200/60 flex items-center justify-center gap-1.5 text-xs text-stone-600 font-serif">
-          <Sparkles className="w-3.5 h-3.5 text-gold-500" />
-          <span>Until Hinal & Nikhil tie the knot</span>
-          <Sparkles className="w-3.5 h-3.5 text-gold-500" />
         </div>
       </motion.div>
     </section>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, Navigation, Phone, ExternalLink } from "lucide-react";
+import { MapPin, Navigation, ExternalLink } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
 
 export default function VenueSection() {
@@ -13,116 +13,44 @@ export default function VenueSection() {
   };
 
   return (
-    <section className="relative py-12 px-4">
-      {/* Title */}
-      <div className="text-center mb-6">
-        <div className="flex items-center justify-center gap-3 mb-1">
-          <div className="h-[1px] w-8 bg-gold-400" />
-          <span className="text-gold-600 font-script text-2xl">Venue & Location</span>
-          <div className="h-[1px] w-8 bg-gold-400" />
-        </div>
-        <h2 className="text-2xl font-serif text-stone-800 tracking-wide font-normal">
-          Residence & Celebration
-        </h2>
-        <p className="text-gold-700 text-xs font-serif uppercase tracking-widest mt-0.5">
-          {venue.city}, {venue.district}
-        </p>
-      </div>
-
-      {/* Main Venue Card */}
+    <section className="relative py-10 px-6 text-center">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="rounded-3xl bg-white border border-gold-300/80 shadow-luxury overflow-hidden"
+        transition={{ duration: 0.5 }}
+        className="max-w-md mx-auto"
       >
-        {/* Venue Image */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-900">
-          <img
-            src={venue.venuePhoto}
-            alt={venue.name}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent" />
-          <div className="absolute bottom-3 left-4 right-4 text-white">
-            <span className="text-[10px] uppercase tracking-widest text-gold-300 font-serif block font-medium">
-              Family Residence & Venue
-            </span>
-            <h3 className="text-lg font-serif font-light text-white">
-              {venue.name}
-            </h3>
-          </div>
+        <div className="flex items-center justify-center gap-3 mb-1.5">
+          <div className="h-[1px] w-10 bg-gold-400/80" />
+          <span className="text-gold-700 font-cinzel text-xs tracking-[0.25em] uppercase font-bold">
+            Celebration Venue
+          </span>
+          <div className="h-[1px] w-10 bg-gold-400/80" />
         </div>
 
-        {/* Venue Info Content */}
-        <div className="p-5">
-          <div className="flex items-start gap-3 mb-4">
-            <div className="p-2.5 rounded-xl bg-gold-50 border border-gold-200 text-gold-700 shrink-0 mt-0.5">
-              <MapPin className="w-4 h-4" />
-            </div>
-            <div>
-              <h4 className="font-serif text-base text-stone-900 font-bold">
-                {venue.name}
-              </h4>
-              <p className="text-xs text-stone-600 font-serif leading-relaxed mt-0.5">
-                {venue.fullAddress}
-              </p>
-            </div>
-          </div>
+        <h3 className="font-cinzel text-2xl sm:text-3xl font-black text-stone-900 mb-1">
+          {venue.name}
+        </h3>
 
-          {/* Procession Route Highlight Card */}
-          <div className="mb-4 p-3 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-left">
-            <span className="text-[10px] uppercase tracking-wider font-serif text-amber-800 font-bold block mb-1">
-              ✦ Wedding Procession Route ✦
-            </span>
-            <p className="text-xs font-serif text-stone-800 font-medium flex items-center gap-1.5">
-              <Navigation className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-              <span>{venue.processionRoute}</span>
-            </p>
-          </div>
+        <p className="text-xs font-serif text-stone-600 max-w-xs mx-auto leading-relaxed mb-4">
+          {venue.fullAddress}
+        </p>
 
-          {/* Map Preview Card with Floating 'Open in Maps' Button */}
-          <div className="relative rounded-2xl overflow-hidden border border-gold-200 shadow-sm aspect-[16/10] bg-stone-100">
-            <iframe
-              src={venue.googleMapsEmbedUrl}
-              title="Venue Location Map"
-              className="w-full h-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+        <p className="text-xs font-serif text-amber-950 font-semibold mb-5 flex items-center justify-center gap-1.5">
+          <Navigation className="w-3.5 h-3.5 text-gold-600" />
+          <span>Wedding Procession: <strong className="text-stone-900">Galodiya</strong> to <strong className="text-stone-900">New Metral</strong></span>
+        </p>
 
-            <div className="absolute top-2.5 left-2.5 z-10">
-              <button
-                onClick={handleOpenMaps}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 hover:bg-white text-stone-800 text-[11px] font-serif font-semibold shadow-md border border-stone-200 transition-all"
-              >
-                <Navigation className="w-3 h-3 text-gold-600" />
-                <span>Open in Maps</span>
-                <ExternalLink className="w-3 h-3 text-stone-400" />
-              </button>
-            </div>
-          </div>
-
-          {/* Action Row */}
-          <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between gap-2">
-            <a
-              href={`tel:${venue.contactPhone.replace(/\s+/g, "")}`}
-              className="inline-flex items-center gap-1.5 text-[11px] text-stone-600 font-serif"
-            >
-              <Phone className="w-3 h-3 text-gold-600" />
-              <span>{venue.contactPhone}</span>
-            </a>
-
-            <button
-              onClick={handleOpenMaps}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-stone-950 font-serif text-[11px] font-semibold shadow-sm transition-all"
-            >
-              <Navigation className="w-3 h-3" />
-              <span>Directions</span>
-            </button>
-          </div>
-        </div>
+        {/* Minimal Google Maps Button */}
+        <button
+          onClick={handleOpenMaps}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/90 hover:bg-white border border-gold-400 text-stone-800 text-xs font-serif font-bold shadow-sm transition-all"
+        >
+          <MapPin className="w-3.5 h-3.5 text-gold-600" />
+          <span>Open in Google Maps</span>
+          <ExternalLink className="w-3 h-3 text-stone-400" />
+        </button>
       </motion.div>
     </section>
   );

@@ -4,16 +4,14 @@
 
 @layer base {
   :root {
-    --background: #FFFFFF;
-    --foreground: #1F1B1A;
+    --background: #FAF1E2;
+    --foreground: #2C2523;
   }
 }
 
 html, body {
   color: var(--foreground);
-  background-color: #FFFFFF !important;
-  background-image: url('/images/white-paper-texture.png');
-  background-repeat: repeat;
+  background-color: #FAF1E2 !important;
   font-family: 'Cormorant Garamond', Georgia, serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -21,8 +19,13 @@ html, body {
   padding: 0;
 }
 
-/* Pure White Deckled Paper Texture Background */
+/* Warm Ivory/Cream Wedding Background (Matches Video) */
 .wedding-bg {
+  background-color: #FAF1E2;
+}
+
+/* White Handmade Paper Texture (Exclusively for Envelope Screen) */
+.envelope-paper-bg {
   background-color: #FFFFFF;
   background-image: url('/images/white-paper-texture.png');
   background-repeat: repeat;
@@ -76,11 +79,11 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #FFFFFF;
+  background: #FAF1E2;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E5D5BA;
+  background: #E2D0B6;
   border-radius: 9999px;
 }
 

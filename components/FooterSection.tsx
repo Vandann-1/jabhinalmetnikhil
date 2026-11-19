@@ -16,49 +16,51 @@ export default function FooterSection({ onReopenEnvelope }: FooterSectionProps) 
       navigator
         .share({
           title: `Wedding of ${couple.bride.firstName} & ${couple.groom.firstName}`,
-          text: `You're cordially invited to celebrate the wedding of ${couple.bride.firstName} & ${couple.groom.firstName}! ${couple.hashtag}`,
+          text: `You're cordially invited to celebrate the wedding of ${couple.bride.firstName} & ${couple.groom.firstName}! #JabHinalMetNikhil`,
           url: window.location.href,
         })
         .catch(() => {});
     } else {
       const waUrl = `https://wa.me/?text=${encodeURIComponent(
-        `Join us in celebrating the wedding of ${couple.bride.firstName} & ${couple.groom.firstName}! 💍✨\n\nView the digital invitation: ${window.location.href}\n\n${couple.hashtag}`
+        `Join us in celebrating the wedding of ${couple.bride.firstName} & ${couple.groom.firstName}! 💍✨\n\nView the digital invitation: ${window.location.href}\n\n#JabHinalMetNikhil`
       )}`;
       window.open(waUrl, "_blank");
     }
   };
 
   return (
-    <footer className="relative mt-12 pt-10 pb-24 px-4 text-center border-t border-gold-300/60 bg-white">
+    <footer className="relative mt-10 pt-10 pb-20 px-6 text-center border-t border-gold-300/60 bg-[#FAF1E2]">
       <div className="max-w-xs mx-auto flex flex-col items-center">
         
         {/* Monogram Seal */}
-        <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#8E691A] via-[#E9C874] to-[#FFF3C2] p-0.5 flex items-center justify-center shadow-seal border border-[#FEEBA4] mb-3">
-          <div className="w-full h-full rounded-full bg-gradient-to-br from-[#E2B958] via-[#C59B27] to-[#875F0E] flex items-center justify-center p-2 shadow-inner">
+        <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-1 flex items-center justify-center border-2 border-[#D4AF37] shadow-md mb-3">
+          <div className="w-full h-full rounded-full bg-gradient-to-br from-[#7A1424] via-[#5C0D1A] to-[#3B0710] flex items-center justify-center p-1.5 shadow-inner">
             <img
               src="/images/hn-logo-gold.png"
               alt="HN Logo"
-              className="w-full h-full object-contain filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]"
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
 
-        <h3 className="font-serif text-2xl text-stone-900 font-normal">
+        <h3 className="font-cinzel text-2xl font-black text-stone-900">
           {couple.bride.firstName} & {couple.groom.firstName}
         </h3>
-        <p className="text-gold-700 font-serif text-xs uppercase tracking-widest mt-0.5 mb-3 font-semibold">
-          {couple.hashtag}
+
+        {/* Wedding Hashtag */}
+        <p className="text-gold-800 font-cinzel text-xs font-bold tracking-[0.2em] uppercase mt-1 mb-3">
+          #JabHinalMetNikhil
         </p>
 
         <p className="text-xs text-stone-600 font-serif italic max-w-xs leading-relaxed mb-6">
           &ldquo;With gratitude in our hearts, we eagerly await your gracious presence to bless our new beginning.&rdquo;
         </p>
 
-        {/* Action Buttons */}
+        {/* Minimal Action Buttons */}
         <div className="flex flex-col w-full gap-2.5 mb-6">
           <button
             onClick={handleShare}
-            className="w-full py-2.5 rounded-full bg-gold-600 hover:bg-gold-700 text-white font-serif text-xs font-semibold shadow-sm transition-all flex items-center justify-center gap-1.5"
+            className="w-full py-2.5 rounded-full bg-gold-600 hover:bg-gold-700 text-white font-serif text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-1.5 active:scale-95"
           >
             <Share2 className="w-3.5 h-3.5" />
             <span>Share Invitation Link</span>
@@ -66,7 +68,7 @@ export default function FooterSection({ onReopenEnvelope }: FooterSectionProps) 
 
           <button
             onClick={onReopenEnvelope}
-            className="w-full py-2.5 rounded-full bg-white hover:bg-gold-50 text-stone-700 border border-gold-300 font-serif text-xs font-medium transition-all shadow-sm flex items-center justify-center gap-1.5"
+            className="w-full py-2.5 rounded-full bg-white/80 hover:bg-white text-stone-700 border border-gold-300 font-serif text-xs font-semibold transition-all shadow-sm flex items-center justify-center gap-1.5"
           >
             <RotateCcw className="w-3.5 h-3.5 text-gold-600" />
             <span>Re-seal Envelope</span>
@@ -75,9 +77,8 @@ export default function FooterSection({ onReopenEnvelope }: FooterSectionProps) 
 
         {/* Signature */}
         <div className="text-[11px] text-stone-400 font-serif flex items-center justify-center gap-1">
-          <span>Crafted with</span>
-          <Heart className="w-3 h-3 text-red-500 fill-red-500" />
-          <span>for {couple.bride.firstName} & {couple.groom.firstName}</span>
+          <span>Crafted with love for {couple.bride.firstName} & {couple.groom.firstName}</span>
+          <Heart className="w-3 h-3 text-red-500 fill-red-500 inline" />
         </div>
       </div>
     </footer>
