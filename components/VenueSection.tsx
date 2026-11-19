@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, Navigation, ExternalLink } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
+import TypewriterText from "@/components/TypewriterText";
 
 export default function VenueSection() {
   const { venue } = weddingData;
@@ -30,12 +31,12 @@ export default function VenueSection() {
         </div>
 
         <h3 className="font-cinzel text-2xl sm:text-3xl font-black text-stone-900 mb-1">
-          {venue.name}
+          <TypewriterText text={venue.name} speed={0.04} />
         </h3>
 
-        <p className="text-xs font-serif text-stone-600 max-w-xs mx-auto leading-relaxed mb-4">
-          {venue.fullAddress}
-        </p>
+        <div className="text-xs font-serif text-stone-600 max-w-xs mx-auto leading-relaxed mb-4">
+          <TypewriterText text={venue.fullAddress} speed={0.02} delay={0.15} />
+        </div>
 
         <p className="text-xs font-serif text-amber-950 font-semibold mb-5 flex items-center justify-center gap-1.5">
           <Navigation className="w-3.5 h-3.5 text-gold-600" />

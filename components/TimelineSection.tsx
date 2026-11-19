@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Clock, Calendar, Navigation, Flame, Sparkles, Music, Sun, Heart, UtensilsCrossed } from "lucide-react";
 import { weddingData, CeremonyEvent } from "@/lib/wedding-data";
+import TypewriterText from "@/components/TypewriterText";
 
 export default function TimelineSection() {
   const { ceremonies } = weddingData;
@@ -46,7 +47,7 @@ export default function TimelineSection() {
         </div>
 
         <h2 className="text-3xl font-cinzel font-black text-stone-900 tracking-wider">
-          WEDDING TIMELINE
+          <TypewriterText text="WEDDING TIMELINE" speed={0.04} />
         </h2>
         <p className="text-stone-500 font-serif text-xs mt-1">
           24th January – 26th January 2027
@@ -119,7 +120,7 @@ export default function TimelineSection() {
                     </p>
 
                     <h3 className="text-sm sm:text-base font-cinzel font-bold text-stone-900 leading-tight mt-0.5">
-                      {event.title}
+                      <TypewriterText text={event.title} speed={0.03} delay={0.1} />
                     </h3>
 
                     <p className="text-[11px] text-stone-600 font-serif leading-relaxed mt-0.5">
@@ -155,7 +156,7 @@ export default function TimelineSection() {
                     </p>
 
                     <h3 className="text-sm sm:text-base font-cinzel font-bold text-stone-900 leading-tight mt-0.5">
-                      {event.title}
+                      <TypewriterText text={event.title} speed={0.03} delay={0.1} />
                     </h3>
 
                     <p className="text-[11px] text-stone-600 font-serif leading-relaxed mt-0.5">

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Sparkles, Heart } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
+import TypewriterText from "@/components/TypewriterText";
 
 interface EnvelopeProps {
   onOpen: () => void;
@@ -122,7 +123,11 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
             <Sparkles className="w-3 h-3 text-gold-600 animate-spin" style={{ animationDuration: "14s" }} />
           </div>
           <h1 className="text-stone-900 text-3xl sm:text-4xl md:text-5xl font-cinzel font-black tracking-wide drop-shadow-sm">
-            {weddingData.couple.bride.firstName} & {weddingData.couple.groom.firstName}
+            <TypewriterText
+              text={`${weddingData.couple.bride.firstName} & ${weddingData.couple.groom.firstName}`}
+              speed={0.05}
+              delay={0.2}
+            />
           </h1>
         </motion.div>
 
@@ -242,9 +247,13 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
                 transition={{ delay: 0.25, duration: 0.7 }}
                 className="relative"
               >
-                <span className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#7A1424] via-[#B8860B] to-[#7A1424] tracking-tight drop-shadow-md">
-                  #JabHinalMetNikhil
-                </span>
+                <TypewriterText
+                  text="#JabHinalMetNikhil"
+                  speed={0.045}
+                  delay={0.15}
+                  showCursor={true}
+                  className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#7A1424] via-[#B8860B] to-[#7A1424] tracking-tight drop-shadow-md"
+                />
                 
                 {/* Golden Shimmer Underline */}
                 <motion.div

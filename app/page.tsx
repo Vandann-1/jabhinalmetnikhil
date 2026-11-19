@@ -11,6 +11,7 @@ import CountdownTimer from "@/components/CountdownTimer";
 import VenueSection from "@/components/VenueSection";
 import FooterSection from "@/components/FooterSection";
 import MusicPlayer from "@/components/MusicPlayer";
+import AutoScroller from "@/components/AutoScroller";
 import FallingPetals from "@/components/FallingPetals";
 
 export default function Home() {
@@ -46,6 +47,9 @@ export default function Home() {
 
       {/* 3. Floating Background Royal Wedding Soundtrack Player */}
       <MusicPlayer shouldPlay={startMusic} />
+
+      {/* 4. Automated Cinematic Page Scroller (Auto-scrolls gently through the whole story) */}
+      <AutoScroller shouldStart={isEnvelopeOpen} />
 
       {/* 4. Minimal Editorial Mobile Layout (Zero bulky cards, pure flowing luxury) */}
       <div className="w-full max-w-[450px] min-h-screen bg-[#FAF1E2] relative shadow-lg overflow-x-hidden p-0 m-0 border-0">
