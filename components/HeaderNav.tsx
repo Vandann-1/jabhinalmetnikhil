@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { Share2, Sparkles } from "lucide-react";
 
 export default function HeaderNav() {
@@ -9,7 +8,7 @@ export default function HeaderNav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 30) {
+      if (window.scrollY > 20) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -43,52 +42,49 @@ export default function HeaderNav() {
   };
 
   return (
-    <motion.header
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.45 }}
-      className={`fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[450px] z-40 transition-all duration-300 ${
+    <header
+      className={`sticky top-0 inset-x-0 w-full z-40 transition-all duration-300 ${
         scrolled
           ? "bg-[#FFF0F3]/95 backdrop-blur-md border-b border-[#F5D5DC] shadow-sm py-2"
           : "bg-[#FFF0F3]/90 backdrop-blur-sm border-b border-[#F8E0E5]/70 py-2.5"
       }`}
     >
-      {/* 100% Mathematically Centered Mobile Header Bar */}
-      <div className="relative w-full flex items-center justify-center min-h-[32px] px-3">
+      {/* 100% Balanced and Centered Container */}
+      <div className="relative w-full flex items-center justify-between px-3 min-h-[32px]">
         
-        {/* Absolute Left: Intertwined HN Monogram Seal */}
+        {/* Left: Intertwined HN Monogram Seal (Width: 28px) */}
         <div 
-          className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center cursor-pointer" 
+          className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-0.5 border border-[#D4AF37] shadow-sm flex items-center justify-center shrink-0 cursor-pointer z-10" 
           onClick={scrollToDate}
           title="Save the Date"
         >
-          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-0.5 border border-[#D4AF37] shadow-sm flex items-center justify-center shrink-0">
-            <img
-              src="/images/hn-logo-gold.png"
-              alt="HN"
-              className="w-full h-full object-contain"
-            />
+          <img
+            src="/images/hn-logo-gold.png"
+            alt="HN"
+            className="w-full h-full object-contain"
+          />
+        </div>
+
+        {/* Absolute Dead-Center: #JabHinalMetNikhil */}
+        <div 
+          onClick={scrollToDate}
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        >
+          <div className="pointer-events-auto flex items-center justify-center gap-1.5 cursor-pointer select-none">
+            <Sparkles className="w-3 h-3 text-gold-600 animate-pulse shrink-0" />
+            <span className="font-cinzel text-xs sm:text-sm font-black text-[#7A1424] tracking-[0.16em] uppercase whitespace-nowrap">
+              #JabHinalMetNikhil
+            </span>
+            <Sparkles className="w-3 h-3 text-gold-600 animate-pulse shrink-0" />
           </div>
         </div>
 
-        {/* Exactly Centered on Mobile Screen: #JabHinalMetNikhil */}
-        <div 
-          onClick={scrollToDate}
-          className="flex items-center justify-center gap-1.5 cursor-pointer max-w-[calc(100%-80px)] mx-auto text-center select-none"
-        >
-          <Sparkles className="w-3 h-3 text-gold-600 animate-pulse shrink-0" />
-          <span className="font-cinzel text-xs sm:text-sm font-black text-[#7A1424] tracking-[0.16em] uppercase truncate">
-            #JabHinalMetNikhil
-          </span>
-          <Sparkles className="w-3 h-3 text-gold-600 animate-pulse shrink-0" />
-        </div>
-
-        {/* Absolute Right: 1-Click Share Button */}
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center">
+        {/* Right: 1-Click Share Button (Width: 28px - Exactly Matches Left Width) */}
+        <div className="flex items-center z-10">
           <button
             onClick={handleShare}
             aria-label="Share Invitation"
-            className="w-7 h-7 rounded-full bg-white/90 hover:bg-white text-stone-700 border border-rose-200/90 shadow-xs flex items-center justify-center transition-all active:scale-95"
+            className="w-7 h-7 rounded-full bg-white/90 hover:bg-white text-stone-700 border border-rose-200/90 shadow-xs flex items-center justify-center transition-all active:scale-95 shrink-0"
             title="Share Invitation Link"
           >
             <Share2 className="w-3.5 h-3.5 text-gold-700" />
@@ -96,6 +92,6 @@ export default function HeaderNav() {
         </div>
 
       </div>
-    </motion.header>
+    </header>
   );
 }
