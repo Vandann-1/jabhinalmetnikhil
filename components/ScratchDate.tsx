@@ -25,7 +25,7 @@ function ScratchCard({
   const [isScratched, setIsScratched] = useState(false);
   const isDrawing = useRef(false);
 
-  // Initialize canvas with realistic gold metallic gradient & texture
+  // Initialize canvas with metallic gold gradient & texture
   const initCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -35,7 +35,6 @@ function ScratchCard({
     const width = canvas.width;
     const height = canvas.height;
 
-    // Reset composite operation
     ctx.globalCompositeOperation = "source-over";
 
     // Create metallic gold gradient
@@ -49,28 +48,27 @@ function ScratchCard({
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
 
-    // Subtle decorative border inside scratch foil
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(6, 6, width - 12, height - 12);
+    // Decorative inner border
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.55)";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(8, 8, width - 16, height - 16);
 
-    // Subtle sparkles/text prompt on scratch surface
+    // Text prompts
     ctx.fillStyle = "#5A4213";
-    ctx.font = "bold 11px sans-serif";
+    ctx.font = "bold 13px sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("✦ SCRATCH ✦", width / 2, height / 2 - 8);
+    ctx.fillText("✦ SCRATCH ✦", width / 2, height / 2 - 10);
 
     ctx.fillStyle = "#77571B";
-    ctx.font = "9px sans-serif";
-    ctx.fillText(label, width / 2, height / 2 + 10);
+    ctx.font = "11px sans-serif";
+    ctx.fillText(label, width / 2, height / 2 + 12);
   }, [label]);
 
   useEffect(() => {
     initCanvas();
   }, [initCanvas]);
 
-  // Handle force reveal
   useEffect(() => {
     if (forceReveal && !isScratched) {
       setIsScratched(true);
@@ -85,7 +83,6 @@ function ScratchCard({
     }
   }, [forceReveal, isScratched, onRevealed]);
 
-  // Scratch erase function
   const scratch = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
     if (!canvas || isScratched) return;
@@ -101,10 +98,9 @@ function ScratchCard({
 
     ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
-    ctx.arc(x, y, 18, 0, Math.PI * 2);
+    ctx.arc(x, y, 22, 0, Math.PI * 2);
     ctx.fill();
 
-    // Check scratch progress occasionally
     checkPercentage();
   };
 
@@ -120,25 +116,20 @@ function ScratchCard({
       let transparentCount = 0;
       const totalPixels = pixels.length / 4;
 
-      // Sample every 8th pixel for speed
       for (let i = 3; i < pixels.length; i += 32) {
         if (pixels[i] === 0) {
           transparentCount += 8;
         }
       }
 
-      if (transparentCount / totalPixels > 0.42) {
-        // Scratched more than 42%, reveal completely
+      if (transparentCount / totalPixels > 0.4) {
         setIsScratched(true);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         onRevealed?.();
       }
-    } catch {
-      // ignore security restrictions if any
-    }
+    } catch {}
   };
 
-  // Mouse Handlers
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     isDrawing.current = true;
     scratch(e.clientX, e.clientY);
@@ -153,7 +144,6 @@ function ScratchCard({
     isDrawing.current = false;
   };
 
-  // Touch Handlers
   const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
     isDrawing.current = true;
     if (e.touches[0]) {
@@ -174,18 +164,19 @@ function ScratchCard({
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative w-24 h-28 sm:w-28 sm:h-32 rounded-xl bg-gradient-to-b from-white via-[#FCFAF6] to-[#F5ECE0] shadow-md border border-gold-300/80 p-2 flex flex-col items-center justify-center overflow-hidden group select-none">
+      {/* Card responsive dimensions: small on mobile, spacious on desktop */}
+      <div className="relative w-24 h-28 sm:w-32 sm:h-36 md:w-40 md:h-44 rounded-2xl bg-gradient-to-b from-white via-[#FCFAF6] to-[#F5ECE0] shadow-md hover:shadow-xl border-2 border-gold-300/80 p-2 sm:p-3 flex flex-col items-center justify-center overflow-hidden group select-none transition-shadow">
         
         {/* Revealed Content Behind the Scratch Layer */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center pointer-events-none">
-          <span className="text-stone-400 text-[10px] uppercase tracking-wider font-semibold">
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center pointer-events-none">
+          <span className="text-stone-400 text-[10px] sm:text-xs uppercase tracking-wider font-semibold">
             {label}
           </span>
-          <span className="font-serif text-2xl sm:text-3xl font-bold text-gold-700 tracking-tight my-1 drop-shadow-sm">
+          <span className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-gold-700 tracking-tight my-1 drop-shadow-sm">
             {revealedValue}
           </span>
           {subLabel && (
-            <span className="text-[9px] text-stone-500 uppercase tracking-widest font-medium">
+            <span className="text-[10px] sm:text-xs text-stone-500 uppercase tracking-widest font-medium">
               {subLabel}
             </span>
           )}
@@ -193,9 +184,9 @@ function ScratchCard({
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className="absolute top-1.5 right-1.5"
+              className="absolute top-2 right-2"
             >
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
             </motion.div>
           )}
         </div>
@@ -203,8 +194,8 @@ function ScratchCard({
         {/* Scratchable Canvas Layer */}
         <canvas
           ref={canvasRef}
-          width={120}
-          height={140}
+          width={160}
+          height={180}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -212,14 +203,13 @@ function ScratchCard({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className={`absolute inset-0 w-full h-full cursor-pointer touch-none transition-opacity duration-500 rounded-xl ${
+          className={`absolute inset-0 w-full h-full cursor-pointer touch-none transition-opacity duration-500 rounded-2xl ${
             isScratched ? "opacity-0 pointer-events-none" : "opacity-100"
           }`}
         />
       </div>
 
-      {/* Under-card label */}
-      <span className="mt-2 text-[11px] font-serif text-stone-500 uppercase tracking-widest">
+      <span className="mt-2 text-xs sm:text-sm font-serif text-stone-600 uppercase tracking-widest font-semibold">
         {label}
       </span>
     </div>
@@ -238,7 +228,7 @@ export default function ScratchDate() {
         hasCelebrated.current = true;
         try {
           confetti({
-            particleCount: 80,
+            particleCount: 90,
             spread: 90,
             origin: { y: 0.6 },
             colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#E8B4B8"],
@@ -256,7 +246,7 @@ export default function ScratchDate() {
       hasCelebrated.current = true;
       try {
         confetti({
-          particleCount: 80,
+          particleCount: 90,
           spread: 90,
           origin: { y: 0.6 },
           colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#E8B4B8"],
@@ -268,26 +258,25 @@ export default function ScratchDate() {
   const { day, month, year, label } = weddingData.theDate.scratchCard;
 
   return (
-    <section className="relative py-12 px-4 max-w-lg mx-auto text-center">
-      {/* Decorative floral emblem */}
+    <section className="relative py-14 px-4 sm:px-8 max-w-4xl mx-auto text-center">
       <div className="flex items-center justify-center gap-3 mb-2">
-        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-gold-400" />
-        <span className="text-gold-600 font-script text-2xl">Save The Date</span>
-        <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-gold-400" />
+        <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-r from-transparent to-gold-400" />
+        <span className="text-gold-600 font-script text-2xl sm:text-3xl">Save The Date</span>
+        <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-l from-transparent to-gold-400" />
       </div>
 
-      <h2 className="text-2xl sm:text-3xl font-serif text-stone-800 font-normal tracking-wide">
+      <h2 className="text-3xl sm:text-4xl font-serif text-stone-800 font-normal tracking-wide">
         The Auspicious Date
       </h2>
 
-      <p className="text-gold-700 text-xs sm:text-sm font-serif tracking-widest mt-1 mb-6 flex items-center justify-center gap-1.5">
-        <Sparkles className="w-3.5 h-3.5 text-gold-500 animate-pulse" />
+      <p className="text-gold-700 text-xs sm:text-base font-serif tracking-widest mt-1 mb-8 flex items-center justify-center gap-2">
+        <Sparkles className="w-4 h-4 text-gold-500 animate-pulse" />
         {label}
-        <Sparkles className="w-3.5 h-3.5 text-gold-500 animate-pulse" />
+        <Sparkles className="w-4 h-4 text-gold-500 animate-pulse" />
       </p>
 
-      {/* The 3 Scratch Cards in a Row */}
-      <div className="flex items-center justify-center gap-3 sm:gap-5 mb-4">
+      {/* The 3 Scratch Cards Row - Spacious on Desktop, Compact on Mobile */}
+      <div className="flex items-center justify-center gap-3 sm:gap-6 md:gap-8 mb-6">
         <ScratchCard
           label="Day"
           revealedValue={day}
@@ -314,16 +303,16 @@ export default function ScratchDate() {
         {!forceRevealAll && revealedCount < 3 ? (
           <button
             onClick={handleRevealAllClick}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-stone-500 hover:text-gold-700 bg-stone-100 hover:bg-gold-50 rounded-full border border-stone-200 transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm text-stone-600 hover:text-gold-800 bg-white hover:bg-gold-50 rounded-full border border-stone-200 hover:border-gold-300 transition-all shadow-sm"
           >
-            <Eye className="w-3.5 h-3.5" />
-            <span>Tap to reveal all instantly</span>
+            <Eye className="w-4 h-4 text-gold-600" />
+            <span>Tap to reveal all cards instantly</span>
           </button>
         ) : (
           <motion.div
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-xs text-gold-800 font-serif font-medium bg-gold-50 px-4 py-2 rounded-full border border-gold-200"
+            className="text-xs sm:text-sm text-gold-800 font-serif font-medium bg-gold-50 px-5 py-2.5 rounded-full border border-gold-200 shadow-sm"
           >
             🎉 {weddingData.theDate.formattedDisplayDate}
           </motion.div>

@@ -42,9 +42,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ["var(--font-cormorant)", "Georgia", "serif"],
-        script: ["var(--font-pinyon)", "'Great Vibes'", "cursive"],
-        sans: ["var(--font-montserrat)", "sans-serif"],
+        serif: ["'Cormorant Garamond'", "Georgia", "serif"],
+        script: ["'Pinyon Script'", "'Great Vibes'", "cursive"],
+        sans: ["'Montserrat'", "sans-serif"],
       },
       boxShadow: {
         emboss: "0 2px 4px rgba(0,0,0,0.04), 0 8px 16px rgba(197, 155, 39, 0.08), inset 0 1px 2px rgba(255,255,255,0.8)",

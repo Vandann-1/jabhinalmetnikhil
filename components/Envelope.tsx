@@ -22,19 +22,17 @@ export default function Envelope({ onOpen, isOpen }: EnvelopeProps) {
     // Fire golden celebration confetti
     try {
       confetti({
-        particleCount: 70,
-        spread: 80,
+        particleCount: 85,
+        spread: 90,
         origin: { y: 0.6 },
-        colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#B8860B"],
+        colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#8E1D30", "#B8860B"],
         disableForReducedMotion: true,
       });
-    } catch {
-      // fallback
-    }
+    } catch {}
 
     setTimeout(() => {
       onOpen();
-    }, 1400);
+    }, 1300);
   };
 
   if (isOpen) {
@@ -45,187 +43,170 @@ export default function Envelope({ onOpen, isOpen }: EnvelopeProps) {
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 1 }}
-        exit={{ opacity: 0, scale: 0.96 }}
+        exit={{ opacity: 0, scale: 0.98 }}
         transition={{ duration: 0.8 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gradient-to-br from-[#1C1613]/95 via-[#2E201B]/95 to-[#150F0D]/95 backdrop-blur-md overflow-hidden"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 bg-gradient-to-br from-[#120E0D]/95 via-[#231713]/95 to-[#0E0A09]/98 backdrop-blur-md overflow-hidden select-none"
       >
-        {/* Ambient floating golden dust */}
+        {/* Ambient atmospheric lighting */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-gold-400/10 blur-3xl animate-pulse-slow" />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl animate-pulse-slow" style={{ animationDelay: "1.5s" }} />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-amber-600/10 blur-3xl animate-pulse-slow" />
+          <div
+            className="absolute bottom-1/4 right-1/4 w-[420px] h-[420px] rounded-full bg-gold-400/10 blur-3xl animate-pulse-slow"
+            style={{ animationDelay: "1.8s" }}
+          />
         </div>
 
-        {/* Outer Phone/Screen Frame Preview Container */}
-        <div className="relative w-full max-w-sm sm:max-w-md mx-auto flex flex-col items-center">
-          {/* Header text outside envelope */}
+        {/* Outer Stage Container - Full Desktop & Mobile Responsive */}
+        <div className="relative w-full max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col items-center">
+          
+          {/* Header Title Above Envelope */}
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-center mb-6 px-4"
+            transition={{ duration: 0.8 }}
+            className="text-center mb-4 sm:mb-6 px-4"
           >
-            <p className="text-gold-300 text-xs sm:text-sm tracking-widest uppercase font-serif mb-1 flex items-center justify-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin" style={{ animationDuration: "8s" }} />
+            <p className="text-gold-300 text-xs sm:text-sm tracking-[0.25em] uppercase font-serif mb-1 flex items-center justify-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin" style={{ animationDuration: "10s" }} />
               A Royal Wedding Invitation
-              <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin" style={{ animationDuration: "8s" }} />
+              <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-spin" style={{ animationDuration: "10s" }} />
             </p>
-            <h1 className="text-white text-2xl sm:text-3xl font-serif font-light tracking-wide">
+            <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-serif font-light tracking-wide">
               {weddingData.couple.bride.firstName} & {weddingData.couple.groom.firstName}
             </h1>
           </motion.div>
 
-          {/* The Luxury Embossed Envelope Container */}
+          {/* The Luxury Physical Envelope Container */}
           <div
             onClick={handleOpenClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="relative w-full aspect-[4/5] max-h-[520px] cursor-pointer group select-none perspective-1000"
+            className="relative w-full aspect-[492/368] cursor-pointer group perspective-1000 max-h-[75vh]"
           >
-            {/* Envelope Body */}
-            <div className="relative w-full h-full rounded-2xl bg-gradient-to-b from-[#FAF7F2] via-[#F5EFE6] to-[#ECE3D5] shadow-2xl p-6 border border-[#E2D2BC] overflow-hidden flex flex-col justify-between">
-              
-              {/* Embossed Floral Corner Ornaments */}
-              <div className="absolute top-3 left-3 w-16 h-16 pointer-events-none opacity-40">
-                <svg viewBox="0 0 100 100" fill="none" className="text-gold-600 w-full h-full stroke-current stroke-1">
-                  <path d="M10,10 C40,10 50,20 50,50 C20,50 10,40 10,10 Z" />
-                  <circle cx="25" cy="25" r="4" fill="currentColor" />
-                  <path d="M10,10 L90,10" strokeDasharray="3,3" />
-                  <path d="M10,10 L10,90" strokeDasharray="3,3" />
-                </svg>
-              </div>
-              <div className="absolute top-3 right-3 w-16 h-16 pointer-events-none opacity-40 rotate-90">
-                <svg viewBox="0 0 100 100" fill="none" className="text-gold-600 w-full h-full stroke-current stroke-1">
-                  <path d="M10,10 C40,10 50,20 50,50 C20,50 10,40 10,10 Z" />
-                  <circle cx="25" cy="25" r="4" fill="currentColor" />
-                  <path d="M10,10 L90,10" strokeDasharray="3,3" />
-                  <path d="M10,10 L10,90" strokeDasharray="3,3" />
-                </svg>
-              </div>
-              <div className="absolute bottom-3 left-3 w-16 h-16 pointer-events-none opacity-40 -rotate-90">
-                <svg viewBox="0 0 100 100" fill="none" className="text-gold-600 w-full h-full stroke-current stroke-1">
-                  <path d="M10,10 C40,10 50,20 50,50 C20,50 10,40 10,10 Z" />
-                  <circle cx="25" cy="25" r="4" fill="currentColor" />
-                  <path d="M10,10 L90,10" strokeDasharray="3,3" />
-                  <path d="M10,10 L10,90" strokeDasharray="3,3" />
-                </svg>
-              </div>
-              <div className="absolute bottom-3 right-3 w-16 h-16 pointer-events-none opacity-40 rotate-180">
-                <svg viewBox="0 0 100 100" fill="none" className="text-gold-600 w-full h-full stroke-current stroke-1">
-                  <path d="M10,10 C40,10 50,20 50,50 C20,50 10,40 10,10 Z" />
-                  <circle cx="25" cy="25" r="4" fill="currentColor" />
-                  <path d="M10,10 L90,10" strokeDasharray="3,3" />
-                  <path d="M10,10 L10,90" strokeDasharray="3,3" />
-                </svg>
-              </div>
+            {/* 3D Envelope Wrapper */}
+            <motion.div
+              animate={{
+                scale: isHovered && !opening ? 1.02 : 1,
+                rotateX: isHovered && !opening ? 2 : 0,
+                boxShadow: isHovered
+                  ? "0 30px 60px -15px rgba(0, 0, 0, 0.7), 0 0 35px rgba(212, 175, 55, 0.25)"
+                  : "0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.4)",
+              }}
+              transition={{ duration: 0.4 }}
+              className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-[#DECDB6]/70"
+            >
+              {/* Authentic Embossed Luxury Envelope Texture (From User's Image) */}
+              <img
+                src="/images/envelope-real.png"
+                alt="Luxury Embossed Envelope"
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none transition-transform duration-700"
+              />
 
-              {/* Envelope Flap Lines (Triangular Emboss Creases) */}
-              <div className="absolute inset-0 pointer-events-none">
-                {/* Diagonal subtle gold metallic foil crease lines */}
-                <div className="absolute top-0 left-0 right-0 h-1/2 [clip-path:polygon(0_0,100%_0,50%_100%)] bg-gradient-to-b from-[#F2ECE0] to-[#E5DAC8] border-b border-[#D8C7B0] shadow-sm transition-transform duration-1000 origin-top"
-                  style={{
-                    transform: opening ? "rotateX(-140deg)" : "rotateX(0deg)",
-                    transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-                  }}
-                />
-                
-                {/* Left & Right Flap Emboss Folds */}
-                <div className="absolute top-0 left-0 bottom-0 w-1/2 [clip-path:polygon(0_0,100%_50%,0_100%)] bg-gradient-to-r from-[#EFE8DC]/80 to-[#E4D8C4]/60 border-r border-[#DECDB7]/50" />
-                <div className="absolute top-0 right-0 bottom-0 w-1/2 [clip-path:polygon(100%_0,0_50%,100%_100%)] bg-gradient-to-l from-[#EFE8DC]/80 to-[#E4D8C4]/60 border-l border-[#DECDB7]/50" />
-                
-                {/* Bottom Flap */}
-                <div className="absolute bottom-0 left-0 right-0 h-1/2 [clip-path:polygon(0_100%,100%_100%,50%_0)] bg-gradient-to-t from-[#EFE7DA] to-[#DFD2BF]/70 border-t border-[#D9C8B2]/60" />
-              </div>
+              {/* Gold Shimmer Sheen Sweep Effect on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 
-              {/* Golden Embossed Seal in Center */}
-              <div className="absolute inset-0 flex items-center justify-center z-10">
+              {/* 3D Wax Seal with User's Exact Custom HN Monogram Logo */}
+              {/* Positioned exactly at center X=50%, Y=61% where the flap tip and seal rest */}
+              <div
+                className="absolute top-[61%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+                style={{ width: "18%", aspectRatio: "1/1" }}
+              >
                 <motion.div
                   animate={{
-                    scale: opening ? [1, 1.25, 0] : isHovered ? 1.08 : [1, 1.03, 1],
+                    scale: opening ? [1, 1.35, 0] : isHovered ? 1.12 : [1, 1.04, 1],
                     boxShadow: opening
-                      ? "0 0 50px rgba(212, 175, 55, 0.9)"
+                      ? "0 0 60px rgba(212, 175, 55, 0.95)"
                       : isHovered
-                      ? "0 10px 30px rgba(184, 134, 11, 0.45)"
-                      : "0 6px 18px rgba(139, 101, 20, 0.35)",
+                      ? "0 10px 30px rgba(184, 134, 11, 0.55), 0 0 20px rgba(212, 175, 55, 0.4)"
+                      : "0 6px 18px rgba(90, 60, 20, 0.45)",
                   }}
                   transition={{
-                    duration: opening ? 0.7 : isHovered ? 0.3 : 3,
+                    duration: opening ? 0.6 : isHovered ? 0.3 : 3,
                     repeat: opening || isHovered ? 0 : Infinity,
                     ease: "easeInOut",
                   }}
-                  className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-[#8E691A] via-[#E9C874] to-[#FFF3C2] p-1 flex items-center justify-center shadow-seal border border-[#FEEBA4]"
+                  className="relative w-full h-full rounded-full bg-gradient-to-tr from-[#6C4A11] via-[#D1A741] to-[#FFF3C2] p-[3px] sm:p-1 flex items-center justify-center shadow-seal border border-[#FFEBAA]"
                 >
-                  {/* Wax Seal Outer Scalloped Rims */}
-                  <div className="absolute inset-0 rounded-full border-2 border-dashed border-[#FDF2C7]/60 animate-spin" style={{ animationDuration: "25s" }} />
+                  {/* Wax Seal Outer Rims with Subtle Rotation */}
+                  <div
+                    className="absolute inset-0 rounded-full border border-dashed border-[#FDF2C7]/70 animate-spin"
+                    style={{ animationDuration: "30s" }}
+                  />
 
-                  {/* Wax Inner Core */}
-                  <div className="w-full h-full rounded-full bg-gradient-to-br from-[#E2B958] via-[#C59B27] to-[#875F0E] flex flex-col items-center justify-center shadow-inner relative overflow-hidden">
-                    {/* Shimmer overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full duration-1000 transition-transform" />
-                    
-                    {/* Monogram */}
-                    <span className="font-script text-3xl sm:text-4xl text-[#3A2504] drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)] tracking-wider">
-                      {weddingData.couple.monogram}
-                    </span>
-                    <span className="text-[9px] uppercase tracking-widest text-[#4A320A] font-serif font-bold -mt-1 opacity-80">
-                      Forever
-                    </span>
+                  {/* Wax Seal Inner Core */}
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-[#E2B958] via-[#B8861B] to-[#6E4E0D] flex items-center justify-center shadow-inner relative overflow-hidden p-2">
+                    {/* User's Exact Intertwined HN Monogram Logo */}
+                    <img
+                      src="/images/hn-logo-gold.png"
+                      alt="H & N Monogram"
+                      className="w-full h-full object-contain filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]"
+                    />
                   </div>
 
-                  {/* Pulsing golden rings around seal */}
+                  {/* Pulsing Golden Aura Ring */}
                   <motion.div
-                    animate={{ scale: [1, 1.3, 1], opacity: [0.6, 0, 0.6] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
-                    className="absolute -inset-3 rounded-full border border-gold-400/50 pointer-events-none"
+                    animate={{ scale: [1, 1.45, 1], opacity: [0.7, 0, 0.7] }}
+                    transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+                    className="absolute -inset-3 rounded-full border border-gold-400/60 pointer-events-none"
                   />
                 </motion.div>
               </div>
 
-              {/* Peek of the Wedding Invitation Card inside (slides up on opening) */}
+              {/* The Inner Card Sliding Up on Opening */}
               <motion.div
-                initial={{ y: 20, opacity: 0 }}
+                initial={{ y: "40%", opacity: 0 }}
                 animate={{
-                  y: opening ? -160 : 20,
+                  y: opening ? "-35%" : "40%",
                   opacity: opening ? 1 : 0,
-                  scale: opening ? 1.02 : 0.95,
+                  scale: opening ? 1.03 : 0.95,
                 }}
-                transition={{ duration: 0.9, delay: 0.3 }}
-                className="absolute inset-x-8 top-12 bottom-12 rounded-xl bg-white shadow-2xl border border-gold-300 p-6 flex flex-col items-center justify-center text-center pointer-events-none z-20"
+                transition={{ duration: 0.9, delay: 0.25 }}
+                className="absolute inset-x-6 sm:inset-x-12 top-6 bottom-6 rounded-2xl bg-gradient-to-b from-white via-[#FCFAF6] to-[#F5ECE0] shadow-2xl border-2 border-gold-300 p-6 flex flex-col items-center justify-center text-center pointer-events-none z-30"
               >
-                <div className="text-gold-700 text-xs tracking-widest uppercase font-serif mb-2">
+                <div className="text-gold-700 text-xs sm:text-sm tracking-widest font-serif font-bold mb-2">
                   {weddingData.couple.auspiciousSymbol}
                 </div>
-                <h3 className="font-script text-3xl text-stone-900 mb-1">
+                <div className="w-12 h-12 mb-2">
+                  <img
+                    src="/images/hn-logo-transparent.png"
+                    alt="HN"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl text-stone-900 mb-1">
                   {weddingData.couple.bride.firstName} & {weddingData.couple.groom.firstName}
                 </h3>
-                <p className="text-[11px] text-stone-500 font-serif">
+                <p className="text-xs sm:text-sm text-gold-800 font-serif font-medium mt-1">
                   {weddingData.theDate.formattedDisplayDate}
                 </p>
+                <p className="text-[11px] text-stone-500 font-serif uppercase tracking-widest mt-1">
+                  {weddingData.venue.city}, Gujarat
+                </p>
               </motion.div>
-
-              {/* Bottom Subtle Guidance Hint */}
-              <div className="z-10 mt-auto text-center pb-2">
-                <motion.div
-                  animate={{ y: [0, 4, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity }}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/60 backdrop-blur-sm border border-gold-300/60 shadow-sm text-stone-700 text-xs font-serif"
-                >
-                  <Heart className="w-3 h-3 text-red-500 fill-red-500 animate-pulse" />
-                  <span>Tap the seal to open invitation</span>
-                </motion.div>
-              </div>
-
-            </div>
+            </motion.div>
           </div>
 
-          {/* Bottom couple names & hashtag */}
+          {/* Bottom Tap Instruction Hint */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="mt-4 text-center text-gold-300/80 text-xs tracking-wider"
+            transition={{ delay: 0.3 }}
+            className="mt-5 text-center flex flex-col items-center gap-1.5"
           >
-            {weddingData.couple.hashtag} • {weddingData.venue.city}
+            <motion.div
+              animate={{ y: [0, 4, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-gold-400/40 text-gold-200 text-xs sm:text-sm font-serif cursor-pointer shadow-md"
+              onClick={handleOpenClick}
+            >
+              <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400 animate-pulse" />
+              <span>Tap the golden wax seal to unseal invitation</span>
+            </motion.div>
+            <span className="text-gold-400/70 text-[11px] font-serif tracking-widest">
+              {weddingData.couple.hashtag} • Sound will play
+            </span>
           </motion.div>
+
         </div>
       </motion.div>
     </AnimatePresence>

@@ -29,15 +29,20 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen bg-[#FCFAF6] text-[#2C2523] overflow-x-hidden">
-      {/* Interactive 3D Luxury Wax Seal Envelope Overlay */}
+    <main className="relative min-h-screen bg-[#FCFAF6] text-[#2C2523] overflow-x-hidden paper-texture">
+      {/* 1. Full-Screen Interactive Luxury 3D Embossed Wax Seal Envelope */}
       <Envelope isOpen={isEnvelopeOpen} onOpen={handleOpenEnvelope} />
 
-      {/* Persistent Floating Music Controller */}
+      {/* 2. Floating Background Royal Wedding Soundtrack Player */}
       <MusicPlayer shouldPlay={startMusic} />
 
-      {/* Main Wedding Invitation Experience Container (Styled for mobile-first elegance) */}
-      <div className="w-full max-w-xl mx-auto shadow-[0_0_60px_rgba(0,0,0,0.06)] bg-[#FCFAF6] min-h-screen border-x border-[#F0E6D8]/60 paper-texture">
+      {/* 3. Main Experience Container - Full Desktop & Mobile Responsive */}
+      <div className="relative w-full max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 py-4 sm:py-8">
+        
+        {/* Subtle Decorative Side Gold Filigree Borders for Desktop (lg+) */}
+        <div className="hidden lg:block fixed left-4 top-1/2 -translate-y-1/2 w-8 h-96 border-l-2 border-gold-300/40 pointer-events-none opacity-60" />
+        <div className="hidden lg:block fixed right-4 top-1/2 -translate-y-1/2 w-8 h-96 border-r-2 border-gold-300/40 pointer-events-none opacity-60" />
+
         {/* 1. Hero Cover */}
         <HeroInvitation />
 
@@ -49,7 +54,7 @@ export default function Home() {
         {/* 3. Formal Family Invitation & Lineage */}
         <InvitationText />
 
-        {/* 4. Multi-Ceremony Wedding Timeline */}
+        {/* 4. Multi-Ceremony Wedding Timeline (2-Column Alternating on Desktop, Left-Aligned on Mobile) */}
         <TimelineSection />
 
         {/* 5. Live Celebration Countdown Timer */}
