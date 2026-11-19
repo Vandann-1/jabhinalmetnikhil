@@ -24,10 +24,10 @@ export default function HeroInvitation() {
   };
 
   return (
-    <section className="relative w-full flex flex-col items-center justify-start p-0 m-0 overflow-hidden bg-[#FAF1E2]">
+    <section className="relative w-full flex flex-col items-center justify-start p-0 m-0 overflow-hidden bg-white">
       
-      {/* Full-bleed Seamless Video - No Borders, No Edges, Pure Screen Presentation */}
-      <div className="relative w-full aspect-[9/16] overflow-hidden bg-[#FAF1E2]">
+      {/* Full-bleed Seamless Video - No Borders, No Edges, Flush Full-Width Presentation */}
+      <div className="relative w-full aspect-[9/16] overflow-hidden bg-white">
         <video
           ref={videoRef}
           src="/videos/hero-animation.mp4"
@@ -38,8 +38,8 @@ export default function HeroInvitation() {
           className="w-full h-full object-cover block border-0 rounded-none shadow-none"
         />
 
-        {/* Soft bottom edge blend to seamlessly transition into the cream page */}
-        <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#FAF1E2] to-transparent pointer-events-none" />
+        {/* Soft bottom edge blend into pure white paper */}
+        <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
       </div>
 
       {/* Floating Scroll Indicator Below Video */}
@@ -48,7 +48,7 @@ export default function HeroInvitation() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
         onClick={scrollToNext}
-        className="w-full py-3 flex flex-col items-center justify-center cursor-pointer bg-[#FAF1E2] select-none group"
+        className="w-full py-3.5 flex flex-col items-center justify-center cursor-pointer bg-white select-none group"
       >
         <span className="text-stone-500 font-serif text-[11px] uppercase tracking-[0.25em] group-hover:text-gold-700 transition-colors">
           Scroll Down to Reveal Date

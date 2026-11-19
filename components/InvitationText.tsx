@@ -16,7 +16,7 @@ export default function InvitationText() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="relative rounded-3xl bg-gradient-to-b from-[#FFFDF9] via-[#FAF6ED] to-[#F5EFE4] p-6 sm:p-8 border border-gold-300/80 shadow-luxury"
+        className="relative rounded-3xl bg-white p-6 sm:p-8 border-2 border-gold-300 shadow-luxury"
       >
         {/* Ornate Gold Corner Borders */}
         <div className="absolute top-4 left-4 w-7 h-7 border-t-2 border-l-2 border-gold-500 rounded-tl-lg pointer-events-none" />

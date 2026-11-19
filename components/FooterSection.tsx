@@ -29,7 +29,7 @@ export default function FooterSection({ onReopenEnvelope }: FooterSectionProps) 
   };
 
   return (
-    <footer className="relative mt-12 pt-10 pb-24 px-4 text-center border-t border-gold-300/60 bg-[#FAF1E2]">
+    <footer className="relative mt-12 pt-10 pb-24 px-4 text-center border-t border-gold-300/60 bg-white">
       <div className="max-w-xs mx-auto flex flex-col items-center">
         
         {/* Monogram Seal */}

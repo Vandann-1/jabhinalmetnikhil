@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Sparkles, CheckCircle2, RotateCcw, Calendar, Check } from "lucide-react";
+import { Sparkles, CheckCircle2, RotateCcw, Calendar, Check, Clock, Navigation } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
 
 interface ScratchCanvasProps {
@@ -49,7 +49,7 @@ function ScratchCard({
     ctx.fillRect(0, 0, width, height);
 
     // Elegant dual metallic border
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.85)";
     ctx.lineWidth = 4;
     ctx.strokeRect(8, 8, width - 16, height - 16);
 
@@ -59,21 +59,21 @@ function ScratchCard({
 
     // Text on scratch foil
     ctx.fillStyle = "#4A350E";
-    ctx.font = "bold 16px 'Cinzel', serif, sans-serif";
+    ctx.font = "bold 15px 'Cinzel', serif, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText("✦ SCRATCH ✦", width / 2, height / 2 - 12);
 
     ctx.fillStyle = "#6B4C12";
-    ctx.font = "bold 13px 'Montserrat', sans-serif";
-    ctx.fillText(label.toUpperCase(), width / 2, height / 2 + 14);
+    ctx.font = "bold 12px 'Montserrat', sans-serif";
+    ctx.fillText(label.toUpperCase(), width / 2, height / 2 + 13);
   }, [label]);
 
   useEffect(() => {
     initCanvas();
   }, [initCanvas]);
 
-  const scratch = (x: number, y: number, radius = 26) => {
+  const scratch = (x: number, y: number, radius = 28) => {
     const canvas = canvasRef.current;
     if (!canvas || isScratched) return;
     const ctx = canvas.getContext("2d");
@@ -132,7 +132,7 @@ function ScratchCard({
       const y = progress * height;
       const x = (Math.sin(progress * Math.PI * 4) * 0.42 + 0.5) * width;
 
-      scratch(x, y, 30);
+      scratch(x, y, 32);
 
       if (step >= totalSteps) {
         clearInterval(interval);
@@ -170,7 +170,7 @@ function ScratchCard({
   return (
     <div className="flex flex-col items-center">
       {/* High-Definition Pure White Card */}
-      <div className="relative w-[110px] h-[135px] sm:w-[125px] sm:h-[145px] rounded-2xl bg-white shadow-lg border-2 border-gold-400 p-2 flex flex-col items-center justify-center overflow-hidden group select-none">
+      <div className="relative w-[105px] h-[135px] sm:w-[125px] sm:h-[145px] rounded-2xl bg-white shadow-lg border-2 border-gold-400 p-2 flex flex-col items-center justify-center overflow-hidden group select-none">
         
         {/* Revealed Content: Ultra-Clean, Bold, Proper 26 January */}
         <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center pointer-events-none bg-white">
@@ -268,7 +268,7 @@ export default function ScratchDate() {
         hasCelebrated.current = true;
         try {
           confetti({
-            particleCount: 90,
+            particleCount: 95,
             spread: 95,
             origin: { y: 0.65 },
             colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#7A1424"],
@@ -288,15 +288,27 @@ export default function ScratchDate() {
     setTimeout(() => setActiveAutoCard(2), 2400);
   };
 
+  const handleAddWeddingToCalendar = () => {
+    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+      "Wedding Ceremony of Hinal & Nikhil"
+    )}&details=${encodeURIComponent(
+      "Hast Melap & Wedding Ceremony of Hinal & Nikhil. Procession from Galodiya to New Metral, Khedbrahma, Gujarat."
+    )}&location=${encodeURIComponent(
+      weddingData.venue.fullAddress
+    )}&dates=20270126T070000Z/20270126T140000Z`;
+
+    window.open(gCalUrl, "_blank");
+  };
+
   const { day, month, year, label } = weddingData.theDate.scratchCard;
 
   return (
-    <section ref={sectionRef} className="relative py-12 px-4 text-center bg-[#FAF1E2]">
+    <section ref={sectionRef} className="relative py-12 px-4 text-center">
       
       {/* Decorative Ribbon Header */}
       <div className="flex items-center justify-center gap-3 mb-1">
         <div className="h-[1px] w-12 bg-gold-400" />
-        <span className="text-gold-700 font-script text-2xl">Auspicious Wedding Date</span>
+        <span className="text-gold-700 font-script text-2xl">Auspicious Wedding Muhurat</span>
         <div className="h-[1px] w-12 bg-gold-400" />
       </div>
 
@@ -304,49 +316,64 @@ export default function ScratchDate() {
         SAVE THE DATE
       </h2>
 
-      {/* Prominent Crystal-Clear 26 JANUARY 2027 Card (As requested: Bold, Clear, Proper & Beautiful!) */}
+      {/* Prominent Crystal-Clear 26 JANUARY 2027 Card (Bold, Majestic, Pure White Card) */}
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        className="w-full max-w-[360px] mx-auto my-4 p-5 rounded-3xl bg-white border-2 border-gold-400 shadow-luxury flex flex-col items-center justify-center text-center"
+        className="w-full max-w-[380px] mx-auto my-4 p-6 rounded-3xl bg-white border-2 border-gold-400 shadow-luxury flex flex-col items-center justify-center text-center relative overflow-hidden"
       >
-        <span className="text-[11px] font-sans font-bold uppercase tracking-[0.25em] text-gold-800 mb-1">
-          ✦ Auspicious Muhurat ✦
+        {/* Subtle Gold Corner Accents */}
+        <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-gold-400 rounded-tl pointer-events-none" />
+        <div className="absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 border-gold-400 rounded-tr pointer-events-none" />
+        <div className="absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 border-gold-400 rounded-bl pointer-events-none" />
+        <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-gold-400 rounded-br pointer-events-none" />
+
+        <span className="text-[11px] font-cinzel font-bold uppercase tracking-[0.25em] text-gold-800 mb-1">
+          ✦ Sacred Matrimony Muhurat ✦
         </span>
 
-        {/* 26 JANUARY Grand Display */}
-        <div className="my-1 flex items-baseline justify-center gap-3">
-          <span className="font-cinzel text-6xl sm:text-7xl font-black text-[#7A1424] tracking-tight leading-none drop-shadow-sm">
+        {/* Day of Week */}
+        <span className="font-cinzel text-sm font-bold text-stone-600 tracking-[0.3em] uppercase mt-1">
+          T U E S D A Y
+        </span>
+
+        {/* 26 Grand Display */}
+        <div className="my-1">
+          <span className="font-cinzel text-7xl sm:text-8xl font-black text-[#7A1424] tracking-tight leading-none drop-shadow-[0_2px_4px_rgba(122,20,36,0.15)] block">
             26
           </span>
-          <div className="text-left flex flex-col justify-center">
-            <span className="font-cinzel text-2xl sm:text-3xl font-black text-[#7A1424] tracking-wider leading-none">
-              JANUARY
-            </span>
-            <span className="font-cinzel text-sm sm:text-base font-bold text-stone-800 tracking-widest mt-1">
-              2027 • TUESDAY
-            </span>
-          </div>
+        </div>
+
+        {/* Month & Year */}
+        <span className="font-cinzel text-2xl sm:text-3xl font-black text-[#7A1424] tracking-[0.18em] leading-none mb-2">
+          JANUARY 2027
+        </span>
+
+        {/* Auspicious Muhurat Time */}
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-50 border border-gold-300 text-gold-900 text-xs font-serif font-bold mt-1">
+          <Clock className="w-3.5 h-3.5 text-gold-600 shrink-0" />
+          <span>Hast Melap & Wedding Ceremony • 12:30 PM</span>
         </div>
 
         {/* Wedding Procession Route Summary under date */}
-        <div className="mt-3 pt-3 border-t border-gold-200/80 w-full text-center">
-          <p className="text-[11px] font-serif text-stone-600 font-medium">
-            Wedding Procession from <span className="font-bold text-stone-900">Galodiya</span> to <span className="font-bold text-stone-900">Metral</span>
+        <div className="mt-3 pt-3 border-t border-gold-200 w-full text-center">
+          <p className="text-[11px] font-serif text-stone-700 font-medium flex items-center justify-center gap-1.5">
+            <Navigation className="w-3.5 h-3.5 text-gold-600 shrink-0" />
+            <span>Procession: <strong className="text-stone-900">Galodiya</strong> to <strong className="text-stone-900">New Metral</strong></span>
           </p>
         </div>
       </motion.div>
 
       {/* Scratch Instruction Prompt */}
-      <p className="text-gold-800 text-xs font-serif tracking-widest mt-3 mb-5 flex items-center justify-center gap-1.5 font-semibold">
+      <p className="text-gold-800 text-xs font-serif tracking-widest mt-4 mb-4 flex items-center justify-center gap-1.5 font-semibold">
         <Sparkles className="w-3.5 h-3.5 text-gold-500 animate-pulse" />
-        {label}
+        <span>Auto-reveals on scroll or swipe with finger</span>
         <Sparkles className="w-3.5 h-3.5 text-gold-500 animate-pulse" />
       </p>
 
       {/* The 3 Scratch Cards: 26 | JANUARY | 2027 */}
-      <div className="flex items-center justify-center gap-3 sm:gap-4 mb-4">
+      <div className="flex items-center justify-center gap-2.5 sm:gap-4 mb-4">
         <ScratchCard
           label="Day"
           revealedValue={day}
@@ -357,41 +384,47 @@ export default function ScratchDate() {
         <ScratchCard
           label="Month"
           revealedValue={month}
+          subLabel="2027"
           isAutoScratching={activeAutoCard >= 1}
           onRevealed={handleCardRevealed}
         />
         <ScratchCard
           label="Year"
           revealedValue={year}
+          subLabel="Hast Melap"
           isAutoScratching={activeAutoCard >= 2}
           onRevealed={handleCardRevealed}
         />
       </div>
 
-      {/* Re-scratch / Status Control */}
-      <div className="mt-3 flex items-center justify-center gap-2">
+      {/* Re-scratch & Calendar Controls */}
+      <div className="mt-4 flex flex-col items-center justify-center gap-2">
         {revealedCount >= 3 ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center gap-2"
+            className="flex flex-wrap items-center justify-center gap-2"
           >
             <span className="text-xs font-cinzel text-[#7A1424] bg-white px-4 py-1.5 rounded-full border border-gold-300 font-bold shadow-sm">
               ✨ 26th January 2027 Revealed ✨
             </span>
             <button
               onClick={handleReset}
-              className="p-1.5 rounded-full text-stone-500 hover:text-stone-800 bg-white border border-gold-200 shadow-sm"
+              className="p-1.5 rounded-full text-stone-500 hover:text-stone-800 bg-white border border-gold-300 shadow-sm"
               title="Scratch Again"
             >
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </motion.div>
-        ) : (
-          <span className="text-[11px] text-stone-500 font-serif italic">
-            Auto-reveals on scroll or swipe with finger
-          </span>
-        )}
+        ) : null}
+
+        <button
+          onClick={handleAddWeddingToCalendar}
+          className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white hover:bg-gold-50 border border-gold-400 text-gold-900 text-xs font-serif font-bold shadow-sm transition-all"
+        >
+          <Calendar className="w-3.5 h-3.5 text-gold-600" />
+          <span>Add 26th January 2027 to Calendar</span>
+        </button>
       </div>
 
     </section>

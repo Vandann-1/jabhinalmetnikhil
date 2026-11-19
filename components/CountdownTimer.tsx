@@ -75,7 +75,7 @@ export default function CountdownTimer() {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="rounded-2xl bg-gradient-to-b from-[#FFFDF9] via-[#FAF6ED] to-[#F5ECE0] border border-gold-300/80 p-5 shadow-luxury"
+        className="rounded-3xl bg-white border-2 border-gold-300 p-6 shadow-luxury"
       >
         {/* Ticker Row */}
         <div className="flex items-center justify-center gap-1.5 sm:gap-3">

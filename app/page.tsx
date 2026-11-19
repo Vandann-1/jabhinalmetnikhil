@@ -28,7 +28,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen bg-[#FAF1E2] text-[#2C2523] flex justify-center selection:bg-gold-200 selection:text-gold-900 overflow-x-hidden">
+    <main className="relative min-h-screen bg-white wedding-bg text-[#2C2523] flex justify-center selection:bg-gold-200 selection:text-gold-900 overflow-x-hidden">
       
       {/* 1. Falling Rose & Golden Petals Background Layer */}
       <FallingPetals />
@@ -39,8 +39,8 @@ export default function Home() {
       {/* 3. Floating Background Royal Wedding Soundtrack Player */}
       <MusicPlayer shouldPlay={startMusic} />
 
-      {/* 4. Pure Clean Mobile-First Container (Seamless #FAF1E2, Flush Full-Bleed Video) */}
-      <div className="w-full max-w-[450px] min-h-screen bg-[#FAF1E2] relative shadow-lg overflow-x-hidden p-0 m-0 border-0">
+      {/* 4. Pure Clean Mobile-First Container (Seamless White Paper Texture, Flush Full-Bleed Video) */}
+      <div className="w-full max-w-[450px] min-h-screen bg-white wedding-bg relative shadow-2xl overflow-x-hidden p-0 m-0 border-0">
         
         {/* 1. Hero Animated Video - Full-Screen Width, No Borders, Seamlessly Integrated */}
         <HeroInvitation />
