@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, Sparkles } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
 import TypewriterText from "@/components/TypewriterText";
 
@@ -13,15 +13,13 @@ export default function InvitationText() {
     <section className="relative py-12 px-6 text-center select-none">
       
       {/* Top Blessing in Sanskrit */}
-      <div className="text-gold-700 text-sm font-serif font-bold tracking-[0.25em] mb-2 flex items-center justify-center gap-1.5">
-        <Sparkles className="w-3.5 h-3.5 text-gold-600 animate-pulse shrink-0" />
+      <div className="text-gold-700 text-sm font-serif font-bold tracking-[0.25em] mb-2 flex items-center justify-center">
         <TypewriterText
           text={couple.auspiciousSymbol}
           lang="hi"
           speed={0.04}
           className="tracking-[0.25em]"
         />
-        <Sparkles className="w-3.5 h-3.5 text-gold-600 animate-pulse shrink-0" />
       </div>
 
       {/* Gujarati Blessing: સ્નેહાધીન */}

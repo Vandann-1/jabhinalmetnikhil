@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Share2, Sparkles } from "lucide-react";
+import { Share2 } from "lucide-react";
 
 export default function HeaderNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -70,12 +70,10 @@ export default function HeaderNav() {
           onClick={scrollToDate}
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
         >
-          <div className="pointer-events-auto flex items-center justify-center gap-1.5 cursor-pointer select-none">
-            <Sparkles className="w-3 h-3 text-gold-600 animate-pulse shrink-0" />
+          <div className="pointer-events-auto flex items-center justify-center cursor-pointer select-none">
             <span className="font-cinzel text-xs sm:text-sm font-black text-[#7A1424] tracking-[0.16em] uppercase whitespace-nowrap">
               #JabHinalMetNikhil
             </span>
-            <Sparkles className="w-3 h-3 text-gold-600 animate-pulse shrink-0" />
           </div>
         </div>
 

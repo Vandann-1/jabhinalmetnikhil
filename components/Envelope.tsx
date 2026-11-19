@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Sparkles, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
 import TypewriterText from "@/components/TypewriterText";
 
@@ -115,12 +115,10 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
           transition={{ duration: 0.6 }}
           className="relative z-20 pt-8 sm:pt-12 text-center px-4"
         >
-          <div className="inline-flex items-center justify-center gap-2 mb-1.5 px-3 py-1 rounded-full bg-white/80 border border-gold-300/80 shadow-sm">
-            <Sparkles className="w-3 h-3 text-gold-600 animate-spin" style={{ animationDuration: "14s" }} />
+          <div className="inline-flex items-center justify-center mb-1.5 px-3 py-1 rounded-full bg-white/80 border border-gold-300/80 shadow-sm">
             <span className="text-gold-900 text-[10px] sm:text-xs tracking-[0.25em] uppercase font-cinzel font-bold">
               The Wedding Celebration
             </span>
-            <Sparkles className="w-3 h-3 text-gold-600 animate-spin" style={{ animationDuration: "14s" }} />
           </div>
           <h1 className="text-stone-900 text-3xl sm:text-4xl md:text-5xl font-cinzel font-black tracking-wide drop-shadow-sm">
             <TypewriterText
