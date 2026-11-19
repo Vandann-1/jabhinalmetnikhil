@@ -63,9 +63,14 @@ export default function InvitationText() {
             {couple.groom.firstName}
           </h2>
 
-          <p className="text-xs font-serif text-gold-800 font-semibold tracking-wider pt-1">
-            Son of {couple.groom.fatherName} & {couple.groom.motherName}
-          </p>
+          <div className="pt-1.5 space-y-0.5">
+            <p className="text-xs font-serif text-gold-900 font-bold tracking-wide">
+              Son of {couple.groom.fatherName}
+            </p>
+            <p className="text-xs font-serif text-gold-900 font-bold tracking-wide">
+              & {couple.groom.motherName}
+            </p>
+          </div>
         </div>
 
         {/* Heartfelt Note */}

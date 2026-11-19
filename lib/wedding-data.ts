@@ -123,17 +123,17 @@ export const weddingData: WeddingData = {
     },
     groom: {
       firstName: "Nikhil",
-      fullName: "Nikhil",
-      fatherName: "Mr. Mahendra Patel",
-      motherName: "Mrs. Rekha Patel",
+      fullName: "Nikhil Rathod",
+      fatherName: "Shri Mukeshbhai Manilal Rathod",
+      motherName: "Smt. Induben Mukeshbhai Rathod",
       role: "The Groom",
     },
     monogram: "H & N",
-    hashtag: "#HinalFoundHerNik",
+    hashtag: "#JabHinalMetNikhil",
     auspiciousSymbol: "|| श्री गणेशाय नमः ||",
     tagline: "cordially invite you to the wedding of their daughter",
     gujaratiBlessing: "સ્નેહાધીન (Yours Affectionately)",
-    familyGreeting: "Shri Rakeshbhai Chhaganlal Darji and Smt. Nitaben Rakeshbhai Darji cordially invite you and your family to grace the auspicious wedding ceremonies of their beloved daughter Hinal with Nikhil.",
+    familyGreeting: "Shri Rakeshbhai Chhaganlal Darji and Smt. Nitaben Rakeshbhai Darji cordially invite you and your family to grace the auspicious wedding ceremonies of their beloved daughter Hinal with Nikhil (Son of Shri Mukeshbhai Manilal Rathod and Smt. Induben Mukeshbhai Rathod).",
   },
 
   theDate: {
