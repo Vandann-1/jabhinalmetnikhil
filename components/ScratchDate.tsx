@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Sparkles, CheckCircle2, RotateCcw, Wand2 } from "lucide-react";
+import { Sparkles, CheckCircle2, RotateCcw, CalendarCheck2 } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
 
 interface ScratchCanvasProps {
@@ -24,9 +24,8 @@ function ScratchCard({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isScratched, setIsScratched] = useState(false);
   const isDrawing = useRef(false);
-  const autoScratchTimer = useRef<NodeJS.Timeout | null>(null);
 
-  // Initialize metallic gold scratch canvas
+  // Initialize crisp high-DPI metallic gold canvas
   const initCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -38,40 +37,43 @@ function ScratchCard({
 
     ctx.globalCompositeOperation = "source-over";
 
-    // Gold metallic foil gradient
+    // Rich metallic gold gradient
     const gradient = ctx.createLinearGradient(0, 0, width, height);
     gradient.addColorStop(0, "#C9A043");
-    gradient.addColorStop(0.25, "#F7E6B5");
+    gradient.addColorStop(0.22, "#F7E6B5");
     gradient.addColorStop(0.5, "#D8AD4C");
-    gradient.addColorStop(0.75, "#FCEEC9");
+    gradient.addColorStop(0.78, "#FCEEC9");
     gradient.addColorStop(1, "#A97F29");
 
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
 
-    // Inner border
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
-    ctx.lineWidth = 2.5;
-    ctx.strokeRect(6, 6, width - 12, height - 12);
+    // Elegant dual metallic border
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.75)";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(8, 8, width - 16, height - 16);
 
-    // Prompt text
-    ctx.fillStyle = "#5A4213";
-    ctx.font = "bold 12px sans-serif";
+    ctx.strokeStyle = "rgba(120, 85, 20, 0.4)";
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(12, 12, width - 24, height - 24);
+
+    // Text on scratch foil
+    ctx.fillStyle = "#4A350E";
+    ctx.font = "bold 15px 'Cinzel', serif, sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("✦ SCRATCH ✦", width / 2, height / 2 - 8);
+    ctx.fillText("✦ SCRATCH ✦", width / 2, height / 2 - 12);
 
-    ctx.fillStyle = "#77571B";
-    ctx.font = "10px sans-serif";
-    ctx.fillText(label, width / 2, height / 2 + 10);
+    ctx.fillStyle = "#6B4C12";
+    ctx.font = "bold 13px 'Montserrat', sans-serif";
+    ctx.fillText(label.toUpperCase(), width / 2, height / 2 + 14);
   }, [label]);
 
   useEffect(() => {
     initCanvas();
   }, [initCanvas]);
 
-  // Scratch erase function
-  const scratch = (x: number, y: number, radius = 20) => {
+  const scratch = (x: number, y: number, radius = 24) => {
     const canvas = canvasRef.current;
     if (!canvas || isScratched) return;
     const ctx = canvas.getContext("2d");
@@ -103,7 +105,7 @@ function ScratchCard({
         }
       }
 
-      if (transparentCount / totalPixels > 0.42) {
+      if (transparentCount / totalPixels > 0.4) {
         setIsScratched(true);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         onRevealed?.();
@@ -111,7 +113,7 @@ function ScratchCard({
     } catch {}
   };
 
-  // Automated Smooth Scratch Animation (when user scrolls into view!)
+  // Automated Smooth Scratch Animation (when scrolled into view)
   useEffect(() => {
     if (!isAutoScratching || isScratched) return;
 
@@ -119,7 +121,7 @@ function ScratchCard({
     if (!canvas) return;
 
     let step = 0;
-    const totalSteps = 28;
+    const totalSteps = 26;
     const width = canvas.width;
     const height = canvas.height;
 
@@ -127,11 +129,10 @@ function ScratchCard({
       step++;
       const progress = step / totalSteps;
 
-      // S-curve sweeping motion across the card
       const y = progress * height;
-      const x = (Math.sin(progress * Math.PI * 4) * 0.4 + 0.5) * width;
+      const x = (Math.sin(progress * Math.PI * 4) * 0.42 + 0.5) * width;
 
-      scratch(x, y, 24);
+      scratch(x, y, 28);
 
       if (step >= totalSteps) {
         clearInterval(interval);
@@ -140,12 +141,12 @@ function ScratchCard({
         if (ctx) ctx.clearRect(0, 0, width, height);
         onRevealed?.();
       }
-    }, 45);
+    }, 40);
 
     return () => clearInterval(interval);
   }, [isAutoScratching]);
 
-  // Touch and Mouse handlers
+  // Pointer Handlers
   const handlePointerDown = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -168,21 +169,30 @@ function ScratchCard({
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative w-24 h-28 sm:w-28 sm:h-32 rounded-2xl bg-gradient-to-b from-white via-[#FCFAF6] to-[#F5ECE0] shadow-md border border-gold-300/80 p-2 flex flex-col items-center justify-center overflow-hidden group select-none">
+      {/* High-Definition Responsive Card */}
+      <div className="relative w-[105px] h-[125px] sm:w-[115px] sm:h-[135px] rounded-2xl bg-gradient-to-b from-white via-[#FFFDF9] to-[#F8F1E4] shadow-md border-2 border-gold-400/80 p-2.5 flex flex-col items-center justify-center overflow-hidden group select-none">
         
-        {/* Revealed Content Behind the Scratch Layer */}
+        {/* Revealed Content: Ultra-Clean, Proper, Bold Font */}
         <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center pointer-events-none">
-          <span className="text-stone-400 text-[10px] uppercase tracking-wider font-semibold">
+          <span className="text-stone-400 text-[10px] uppercase tracking-wider font-sans font-semibold">
             {label}
           </span>
-          <span className="font-serif text-2xl sm:text-3xl font-bold text-gold-700 tracking-tight my-1 drop-shadow-sm">
+
+          {/* Large, Clear, Regal Number / Month */}
+          <span className="font-cinzel text-3xl sm:text-4xl font-extrabold text-[#7A1424] tracking-tight my-0.5 drop-shadow-[0_1px_1px_rgba(0,0,0,0.15)] leading-none">
             {revealedValue}
           </span>
-          {subLabel && (
-            <span className="text-[9px] text-stone-500 uppercase tracking-widest font-medium">
+
+          {subLabel ? (
+            <span className="text-[10px] text-gold-800 font-serif font-bold italic tracking-wider">
               {subLabel}
             </span>
+          ) : (
+            <span className="text-[9px] text-stone-500 uppercase tracking-widest font-sans font-medium">
+              2027
+            </span>
           )}
+
           {isScratched && (
             <motion.div
               initial={{ scale: 0 }}
@@ -194,11 +204,11 @@ function ScratchCard({
           )}
         </div>
 
-        {/* Scratchable Canvas Layer */}
+        {/* Scratchable Canvas Layer (High-Resolution 2x scale for retina crispness) */}
         <canvas
           ref={canvasRef}
-          width={130}
-          height={150}
+          width={220}
+          height={260}
           onMouseDown={(e) => handlePointerDown(e.clientX, e.clientY)}
           onMouseMove={(e) => handlePointerMove(e.clientX, e.clientY)}
           onMouseUp={() => { isDrawing.current = false; }}
@@ -216,7 +226,7 @@ function ScratchCard({
         />
       </div>
 
-      <span className="mt-1.5 text-[11px] font-serif text-stone-600 uppercase tracking-widest font-medium">
+      <span className="mt-1.5 text-xs font-cinzel font-bold text-stone-700 uppercase tracking-widest">
         {label}
       </span>
     </div>
@@ -230,20 +240,18 @@ export default function ScratchDate() {
   const hasTriggeredScroll = useRef(false);
   const hasCelebrated = useRef(false);
 
-  // Trigger smooth auto-scratch when user scrolls to this section!
+  // Trigger smooth progressive auto-scratch on scroll into view
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !hasTriggeredScroll.current) {
           hasTriggeredScroll.current = true;
-
-          // Start smooth progressive auto-scratching
-          setTimeout(() => setActiveAutoCard(0), 400); // Card 1 (Day)
-          setTimeout(() => setActiveAutoCard(1), 1600); // Card 2 (Month)
-          setTimeout(() => setActiveAutoCard(2), 2800); // Card 3 (Year)
+          setTimeout(() => setActiveAutoCard(0), 400); // Card 1 (26)
+          setTimeout(() => setActiveAutoCard(1), 1500); // Card 2 (JANUARY)
+          setTimeout(() => setActiveAutoCard(2), 2600); // Card 3 (2027)
         }
       },
-      { threshold: 0.35 }
+      { threshold: 0.3 }
     );
 
     if (sectionRef.current) {
@@ -263,7 +271,7 @@ export default function ScratchDate() {
             particleCount: 85,
             spread: 90,
             origin: { y: 0.65 },
-            colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#E8B4B8", "#881337"],
+            colors: ["#D4AF37", "#F3E5AB", "#FFF8DC", "#C5A059", "#8B1D2C"],
           });
         } catch {}
       }
@@ -275,36 +283,43 @@ export default function ScratchDate() {
     setRevealedCount(0);
     hasCelebrated.current = false;
     setActiveAutoCard(-1);
-    // Restart animation
     setTimeout(() => setActiveAutoCard(0), 200);
-    setTimeout(() => setActiveAutoCard(1), 1400);
-    setTimeout(() => setActiveAutoCard(2), 2600);
+    setTimeout(() => setActiveAutoCard(1), 1300);
+    setTimeout(() => setActiveAutoCard(2), 2400);
   };
 
   const { day, month, year, label } = weddingData.theDate.scratchCard;
 
   return (
-    <section ref={sectionRef} className="relative py-12 px-4 text-center">
+    <section ref={sectionRef} className="relative py-10 px-4 text-center bg-[#FAF1E2]">
       
       {/* Decorative Ribbon Header */}
-      <div className="flex items-center justify-center gap-3 mb-2">
+      <div className="flex items-center justify-center gap-3 mb-1">
         <div className="h-[1px] w-10 bg-gold-400" />
-        <span className="text-gold-600 font-script text-2xl">Save The Date</span>
+        <span className="text-gold-700 font-script text-2xl">Auspicious Celebration</span>
         <div className="h-[1px] w-10 bg-gold-400" />
       </div>
 
-      <h2 className="text-2xl sm:text-3xl font-serif text-stone-800 tracking-wide font-normal">
-        The Auspicious Date
+      <h2 className="text-3xl font-cinzel font-bold text-stone-900 tracking-wide mb-1">
+        Save The Date
       </h2>
 
-      <p className="text-gold-700 text-xs sm:text-sm font-serif tracking-widest mt-1 mb-6 flex items-center justify-center gap-1.5">
+      {/* Prominent Crystal-Clear Date Banner (As requested: 26 January in clear clean proper font!) */}
+      <div className="my-3 px-4 py-2 rounded-2xl bg-white/95 border-2 border-gold-300 shadow-sm inline-flex items-center gap-2">
+        <CalendarCheck2 className="w-4 h-4 text-[#8B1D2C] shrink-0" />
+        <span className="font-cinzel text-sm sm:text-base font-extrabold text-[#7A1424] tracking-wide">
+          Tuesday, 26th January 2027
+        </span>
+      </div>
+
+      <p className="text-gold-800 text-xs font-serif tracking-widest mt-1 mb-5 flex items-center justify-center gap-1.5 font-medium">
         <Sparkles className="w-3.5 h-3.5 text-gold-500 animate-pulse" />
         {label}
         <Sparkles className="w-3.5 h-3.5 text-gold-500 animate-pulse" />
       </p>
 
-      {/* The 3 Scratch Cards in a Row */}
-      <div className="flex items-center justify-center gap-3 sm:gap-4 mb-4">
+      {/* The 3 Scratch Cards in a Row: 26 | JANUARY | 2027 */}
+      <div className="flex items-center justify-center gap-2.5 sm:gap-3.5 mb-4">
         <ScratchCard
           label="Day"
           revealedValue={day}
@@ -326,30 +341,29 @@ export default function ScratchDate() {
         />
       </div>
 
-      {/* Status & Re-play Button */}
-      <div className="mt-3 flex flex-col items-center gap-2">
+      {/* Re-scratch / Status Control */}
+      <div className="mt-3 flex items-center justify-center gap-2">
         {revealedCount >= 3 ? (
           <motion.div
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             className="flex items-center gap-2"
           >
-            <span className="text-xs font-serif text-gold-900 bg-gold-50 px-4 py-1.5 rounded-full border border-gold-200 font-medium">
-              🎉 {weddingData.theDate.formattedDisplayDate}
+            <span className="text-xs font-cinzel text-[#7A1424] bg-white/90 px-4 py-1.5 rounded-full border border-gold-300 font-bold shadow-sm">
+              ✨ 26th January 2027 Revealed ✨
             </span>
             <button
               onClick={handleReset}
-              className="p-1.5 rounded-full text-stone-400 hover:text-stone-700 bg-white border border-stone-200"
-              title="Re-play Scratch"
+              className="p-1.5 rounded-full text-stone-500 hover:text-stone-800 bg-white border border-gold-200 shadow-sm"
+              title="Scratch Again"
             >
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
           </motion.div>
         ) : (
-          <div className="inline-flex items-center gap-1.5 text-[11px] text-stone-500 font-serif">
-            <Wand2 className="w-3.5 h-3.5 text-gold-600 animate-pulse" />
-            <span>Auto-reveals on scroll or swipe with finger</span>
-          </div>
+          <span className="text-[11px] text-stone-500 font-serif italic">
+            Auto-reveals on scroll or swipe with finger
+          </span>
         )}
       </div>
 

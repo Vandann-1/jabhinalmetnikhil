@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown, Sparkles } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
 
 export default function HeroInvitation() {
@@ -24,28 +24,10 @@ export default function HeroInvitation() {
   };
 
   return (
-    <section className="relative w-full flex flex-col items-center justify-center pt-2 pb-6 px-3 text-center">
+    <section className="relative w-full flex flex-col items-center justify-start p-0 m-0 overflow-hidden bg-[#FAF1E2]">
       
-      {/* Top Auspicious Symbol */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mb-2"
-      >
-        <span className="text-gold-700 text-xs tracking-[0.25em] font-serif uppercase font-bold block">
-          {weddingData.couple.auspiciousSymbol}
-        </span>
-      </motion.div>
-
-      {/* Main Animated Video Card (Exact Artwork from Video: Couple under Mandap Arch) */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-        className="relative w-full aspect-[9/16] max-h-[82vh] rounded-[28px] overflow-hidden shadow-2xl border-2 border-gold-300/80 bg-stone-900 group"
-      >
-        {/* Animated Video */}
+      {/* Full-bleed Seamless Video - No Borders, No Edges, Pure Screen Presentation */}
+      <div className="relative w-full aspect-[9/16] overflow-hidden bg-[#FAF1E2]">
         <video
           ref={videoRef}
           src="/videos/hero-animation.mp4"
@@ -53,47 +35,29 @@ export default function HeroInvitation() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover select-none"
+          className="w-full h-full object-cover block border-0 rounded-none shadow-none"
         />
 
-        {/* Soft Gold Vignette Gradient at Bottom */}
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent pointer-events-none" />
+        {/* Soft bottom edge blend to seamlessly transition into the cream page */}
+        <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[#FAF1E2] to-transparent pointer-events-none" />
+      </div>
 
-        {/* Floating Ambient Sparkles overlay */}
-        <div className="absolute top-4 right-4 pointer-events-none">
-          <Sparkles className="w-5 h-5 text-gold-300 animate-pulse" />
-        </div>
-        <div className="absolute top-8 left-4 pointer-events-none">
-          <Sparkles className="w-4 h-4 text-amber-200 animate-pulse" style={{ animationDelay: "1s" }} />
-        </div>
-
-        {/* Hashtag & Location Badge inside video bottom */}
-        <div className="absolute bottom-4 inset-x-4 flex items-center justify-between pointer-events-none text-white/90 font-serif text-[11px] px-2">
-          <span className="tracking-widest uppercase text-gold-300 font-semibold drop-shadow">
-            {weddingData.couple.hashtag}
-          </span>
-          <span className="text-white/80 drop-shadow">
-            {weddingData.venue.city}, Gujarat
-          </span>
-        </div>
-      </motion.div>
-
-      {/* Bottom Scroll Indicator */}
+      {/* Floating Scroll Indicator Below Video */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
         onClick={scrollToNext}
-        className="mt-4 flex flex-col items-center cursor-pointer group"
+        className="w-full py-3 flex flex-col items-center justify-center cursor-pointer bg-[#FAF1E2] select-none group"
       >
-        <span className="text-stone-500 font-serif text-[11px] uppercase tracking-widest group-hover:text-gold-700 transition-colors flex items-center gap-1.5 mb-0.5">
-          <span>Scroll down to reveal dates</span>
+        <span className="text-stone-500 font-serif text-[11px] uppercase tracking-[0.25em] group-hover:text-gold-700 transition-colors">
+          Scroll Down to Reveal Date
         </span>
         <motion.div
-          animate={{ y: [0, 5, 0] }}
+          animate={{ y: [0, 4, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="w-4 h-4 text-gold-600" />
+          <ChevronDown className="w-4 h-4 text-gold-600 mt-0.5" />
         </motion.div>
       </motion.div>
 

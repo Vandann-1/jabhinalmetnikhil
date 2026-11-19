@@ -30,7 +30,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen bg-[#1C1613] flex justify-center selection:bg-gold-200 selection:text-gold-900 overflow-x-hidden">
+    <main className="relative min-h-screen bg-[#FAF1E2] text-[#2C2523] flex justify-center selection:bg-gold-200 selection:text-gold-900 overflow-x-hidden">
       
       {/* 1. Falling Rose & Golden Petals Background Layer */}
       <FallingPetals />
@@ -41,33 +41,30 @@ export default function Home() {
       {/* 3. Floating Background Music Player */}
       <MusicPlayer shouldPlay={startMusic} />
 
-      {/* 4. Pure Mobile-First Screen Container (Max 440px width on desktop, 100% on mobile) */}
-      <div className="w-full max-w-[440px] min-h-screen bg-[#FDFBF7] shadow-2xl relative border-x border-[#EDE2D2]/70 wedding-bg overflow-x-hidden">
+      {/* 4. Full Clean Mobile-First Container (Seamless #FAF1E2 Color Throughout, Flush Video) */}
+      <div className="w-full max-w-[450px] min-h-screen bg-[#FAF1E2] relative shadow-lg overflow-x-hidden p-0 m-0 border-0">
         
-        {/* Top subtle ornamental bar */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400" />
-
-        {/* 1. Hero Animated Video Card (Couple under Mandap with Falling Petals) */}
+        {/* 1. Hero Video - Full Screen Width, No Border, No Edges, Seamless Integration */}
         <HeroInvitation />
 
-        {/* 2. Interactive Auto-Scratch Date Section */}
+        {/* 2. Clear & Clean Date Section with 26 January in Royal Typography & Auto-Scratch */}
         <div id="scratch-date-section">
           <ScratchDate />
         </div>
 
-        {/* 3. Formal Family Invitation & Lineage */}
+        {/* 3. Formal Family Invitation & Lineage (Shri Rakeshbhai & Smt. Nitaben Darji) */}
         <InvitationText />
 
-        {/* 4. Multi-Ceremony Wedding Timeline */}
+        {/* 4. Official 6-Ceremony Wedding Timeline (Jan 24 - 26, 2027) */}
         <TimelineSection />
 
-        {/* 5. Live Celebration Countdown Timer */}
+        {/* 5. Live Celebration Countdown Timer to 26th Jan 2027 */}
         <CountdownTimer />
 
-        {/* 6. Venue & Google Maps Navigation */}
+        {/* 6. Venue & Procession Route (C.K. House, Metral & Galodiya to Metral) */}
         <VenueSection />
 
-        {/* 7. Guest Dress Code & Pastel Palette */}
+        {/* 7. Guest Dress Code & Soft Pastel Palette */}
         <DressCodeSection />
 
         {/* 8. Our Love Story Timeline */}

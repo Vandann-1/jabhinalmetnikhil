@@ -4,32 +4,29 @@
 
 @layer base {
   :root {
-    --background: #FDFBF7;
+    --background: #FAF1E2;
     --foreground: #2C2523;
   }
 }
 
-body {
+html, body {
   color: var(--foreground);
-  background: #1C1613; /* Dark luxury backdrop for desktop viewing */
+  background-color: #FAF1E2 !important;
   font-family: 'Cormorant Garamond', Georgia, serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
 }
 
-/* Luxury Wedding Parchment Texture */
+/* Subtle cream paper warmth */
 .wedding-bg {
-  background-color: #FDFBF7;
-  background-image: 
-    radial-gradient(#DECDB6 0.75px, transparent 0.75px),
-    radial-gradient(#DECDB6 0.75px, #FDFBF7 0.75px);
-  background-size: 24px 24px;
-  background-position: 0 0, 12px 12px;
+  background-color: #FAF1E2;
 }
 
 /* Custom Gold Shimmer Text */
 .gold-shimmer-text {
-  background: linear-gradient(110deg, #976C12 0%, #D4AF37 35%, #FFF8DC 50%, #D4AF37 65%, #976C12 100%);
+  background: linear-gradient(110deg, #8B6514 0%, #D4AF37 35%, #FFF8DC 50%, #D4AF37 65%, #8B6514 100%);
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;
@@ -69,17 +66,17 @@ body {
   animation: petalFall linear infinite;
 }
 
-/* Mobile-first smooth scrollbar */
+/* Smooth minimal scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F5EFE6;
+  background: #FAF1E2;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D8C3A0;
+  background: #E2D0B6;
   border-radius: 9999px;
 }
 
