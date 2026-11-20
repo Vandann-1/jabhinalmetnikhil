@@ -220,7 +220,7 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.1 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-white/95 backdrop-blur-sm p-6 text-center"
+              className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-white p-6 text-center"
             >
               {/* Auspicious Emblem */}
               <motion.div

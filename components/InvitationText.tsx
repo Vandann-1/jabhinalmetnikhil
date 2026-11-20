@@ -22,8 +22,8 @@ export default function InvitationText() {
         />
       </div>
 
-      {/* Gujarati Blessing: સ્નેહાધીન */}
-      <div className="inline-block px-4 py-1 rounded-full bg-gold-100/70 border border-gold-300 text-gold-900 text-xs font-serif font-bold mb-4 tracking-wider">
+      {/* Gujarati Blessing: સ્નેહાધીન Badge - Solid, Crisp, High-Contrast */}
+      <div className="inline-block px-4 py-1.5 rounded-full bg-white border-2 border-gold-400 text-[#7A1424] text-xs font-serif font-black mb-4 tracking-wider shadow-xs">
         <TypewriterText
           text="સ્નેહાધીન (Yours Affectionately)"
           lang="gu"
@@ -35,7 +35,7 @@ export default function InvitationText() {
       <div className="max-w-md mx-auto space-y-4">
         
         {/* Ancestor Blessing Intro */}
-        <p className="text-stone-500 text-xs font-serif tracking-[0.2em] uppercase">
+        <p className="text-stone-600 text-xs font-serif tracking-[0.2em] uppercase font-semibold">
           <TypewriterText
             text="With the divine blessings of our ancestors, we"
             speed={0.025}
@@ -61,7 +61,7 @@ export default function InvitationText() {
         </div>
 
         {/* Cordial Invitation Text */}
-        <p className="text-stone-500 text-xs font-serif tracking-[0.2em] uppercase max-w-sm mx-auto leading-relaxed">
+        <p className="text-stone-600 text-xs font-serif tracking-[0.2em] uppercase max-w-sm mx-auto leading-relaxed font-semibold">
           <TypewriterText
             text="cordially invite your gracious presence & blessings to celebrate the wedding of their daughter"
             speed={0.02}
@@ -121,7 +121,7 @@ export default function InvitationText() {
         </div>
 
         {/* Heartfelt Note with Blinking Pen Cursor */}
-        <div className="text-xs text-stone-600 font-serif italic max-w-xs mx-auto leading-relaxed pt-2">
+        <div className="text-xs text-stone-700 font-serif italic max-w-xs mx-auto leading-relaxed pt-2 font-medium">
           &ldquo;
           <TypewriterText
             text="Your prayers, love, and warm presence will make our new beginning truly blessed and memorable."
@@ -133,8 +133,8 @@ export default function InvitationText() {
         </div>
 
         {/* Residence Address */}
-        <div className="pt-4 text-xs text-stone-600 font-serif flex items-center justify-center gap-1.5">
-          <MapPin className="w-3.5 h-3.5 text-gold-600 shrink-0" />
+        <div className="pt-4 text-xs text-stone-700 font-serif flex items-center justify-center gap-1.5 font-medium">
+          <MapPin className="w-3.5 h-3.5 text-gold-700 shrink-0" />
           <TypewriterText
             text={venue.fullAddress}
             speed={0.02}

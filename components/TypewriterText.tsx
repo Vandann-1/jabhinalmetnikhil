@@ -13,20 +13,18 @@ interface TypewriterTextProps {
   cursorClassName?: string;
   once?: boolean; // Animate only once or each time entering view
   lang?: "en" | "gu" | "hi";
-  glow?: boolean;
 }
 
 export default function TypewriterText({
   text,
   as: Component = "span",
   className = "",
-  speed = 0.032,
+  speed = 0.03,
   delay = 0.1,
   showCursor = false,
   cursorClassName = "",
   once = true,
   lang = "en",
-  glow = false,
 }: TypewriterTextProps) {
   // Split text into words and segment each word into graphemes (safe for Gujarati/Hindi matras)
   const wordsWithGraphemes = useMemo(() => {
@@ -59,19 +57,17 @@ export default function TypewriterText({
     },
   };
 
+  // Pure opacity transition with ZERO blur filter or transform rasterization
+  // Guarantees razor-sharp vector text rendering on all retina/mobile displays
   const charVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 4,
-      filter: glow ? "blur(2px)" : "none",
     },
     visible: {
       opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
       transition: {
-        duration: 0.14,
-        ease: "easeOut",
+        duration: 0.08,
+        ease: "linear",
       },
     },
   };

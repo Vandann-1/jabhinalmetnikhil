@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Volume2, VolumeX, Music } from "lucide-react";
+import { motion } from "framer-motion";
+import { Volume2, VolumeX } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
 
 interface MusicPlayerProps {
@@ -62,17 +62,17 @@ export default function MusicPlayer({ shouldPlay }: MusicPlayerProps) {
         preload="auto"
       />
 
-      {/* Floating Music Pill Widget (Matches video bottom-right button) */}
+      {/* Floating Music Pill Widget - Crisp, Solid, High-Contrast */}
       <div className="fixed bottom-5 right-5 z-40">
         <motion.button
           onClick={toggleMusic}
           whileTap={{ scale: 0.92 }}
           animate={{
             boxShadow: isPlaying
-              ? "0 0 20px rgba(212, 175, 55, 0.6)"
-              : "0 4px 12px rgba(0,0,0,0.15)",
+              ? "0 0 16px rgba(212, 175, 55, 0.6)"
+              : "0 4px 12px rgba(0,0,0,0.12)",
           }}
-          className="relative flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-white/90 backdrop-blur-md border border-gold-400/80 shadow-lg text-stone-800 hover:bg-white transition-all group"
+          className="relative flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-white border-2 border-gold-400 shadow-md text-stone-900 hover:bg-gold-50 transition-all group select-none"
           aria-label={isPlaying ? "Pause wedding music" : "Play wedding music"}
           title={weddingData.music.trackTitle}
         >
@@ -84,10 +84,10 @@ export default function MusicPlayer({ shouldPlay }: MusicPlayerProps) {
               <span className="w-0.5 bg-gold-600 rounded-full animate-bounce h-full" style={{ animationDelay: "300ms", animationDuration: "800ms" }} />
             </div>
           ) : (
-            <VolumeX className="w-4 h-4 text-stone-400 group-hover:text-stone-700" />
+            <VolumeX className="w-4 h-4 text-stone-500 group-hover:text-stone-800" />
           )}
 
-          <span className="text-[11px] font-serif font-medium text-stone-700 hidden sm:inline-block">
+          <span className="text-[11px] font-serif font-black text-stone-800 hidden sm:inline-block">
             {isPlaying ? "Music Playing" : "Play Music"}
           </span>
 

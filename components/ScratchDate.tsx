@@ -24,11 +24,11 @@ export default function ScratchDate() {
       
       {/* Delicate Gold Accent Header */}
       <div className="flex items-center justify-center gap-3 mb-2">
-        <div className="h-[1px] w-10 bg-gold-400/80" />
+        <div className="h-[1px] w-10 bg-gold-400" />
         <span className="text-gold-700 font-cinzel text-xs tracking-[0.25em] uppercase font-bold">
           <TypewriterText text="Auspicious Muhurat" speed={0.03} />
         </span>
-        <div className="h-[1px] w-10 bg-gold-400/80" />
+        <div className="h-[1px] w-10 bg-gold-400" />
       </div>
 
       <h2 className="text-3xl sm:text-4xl font-cinzel font-black text-stone-900 tracking-wider mb-2">
@@ -43,7 +43,7 @@ export default function ScratchDate() {
         transition={{ duration: 0.6 }}
         className="my-5 flex flex-col items-center justify-center text-center"
       >
-        <span className="font-cinzel text-sm sm:text-base font-bold text-stone-600 tracking-[0.35em] uppercase mb-1">
+        <span className="font-cinzel text-sm sm:text-base font-bold text-stone-700 tracking-[0.35em] uppercase mb-1">
           <TypewriterText text="T U E S D A Y" speed={0.04} delay={0.2} />
         </span>
 
@@ -63,24 +63,26 @@ export default function ScratchDate() {
           <TypewriterText text="JANUARY 2027" speed={0.04} delay={0.4} />
         </span>
 
-        {/* Auspicious Time & Ceremony */}
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gold-100/60 border border-gold-300 text-gold-950 text-xs font-serif font-bold mb-2">
-          <Clock className="w-3.5 h-3.5 text-gold-700 shrink-0" />
-          <TypewriterText text="Hast Melap & Wedding Ceremony • 12:30 PM" speed={0.02} delay={0.5} />
+        {/* Auspicious Time & Ceremony Badge - High Contrast, Solid, Crisp */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border-2 border-gold-400 text-stone-900 text-xs font-serif font-bold mb-3 shadow-xs">
+          <Clock className="w-3.5 h-3.5 text-[#7A1424] shrink-0" />
+          <span className="text-[#7A1424] font-black">Hast Melap &amp; Wedding Ceremony</span>
+          <span className="text-gold-500 font-bold">•</span>
+          <span className="text-stone-900 font-black">12:30 PM</span>
         </div>
 
         {/* Procession Route */}
-        <p className="text-xs font-serif text-stone-600 flex items-center justify-center gap-1.5 mt-1 mb-5">
-          <Navigation className="w-3.5 h-3.5 text-gold-600 shrink-0" />
-          <span>Procession: <strong className="text-stone-900">Galodiya</strong> to <strong className="text-stone-900">New Metral</strong></span>
+        <p className="text-xs font-serif text-stone-700 font-medium flex items-center justify-center gap-1.5 mt-1 mb-5">
+          <Navigation className="w-3.5 h-3.5 text-gold-700 shrink-0" />
+          <span>Procession: <strong className="text-stone-900 font-bold">Galodiya</strong> to <strong className="text-stone-900 font-bold">New Metral</strong></span>
         </p>
 
         {/* Add to Calendar Button */}
         <button
           onClick={handleAddWeddingToCalendar}
-          className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white/90 hover:bg-white border border-gold-400 text-gold-900 text-xs font-serif font-bold shadow-sm transition-all active:scale-95"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-gold-50 border-2 border-gold-400 text-stone-900 text-xs font-serif font-black shadow-xs transition-all active:scale-95"
         >
-          <Calendar className="w-3.5 h-3.5 text-gold-600" />
+          <Calendar className="w-4 h-4 text-gold-700" />
           <span>Add 26th January 2027 to Calendar</span>
         </button>
       </motion.div>

@@ -28,7 +28,7 @@ export default function HeaderNav() {
       }).catch(() => {});
     } else {
       const waUrl = `https://wa.me/?text=${encodeURIComponent(
-        `Join us in celebrating the royal wedding of Hinal & Nikhil! 💍✨\n\nView the invitation: ${window.location.href}\n\n#JabHinalMetNikhil`
+        `Join us in celebrating the royal wedding of Hinal & Nikhil! 💍\n\nView the invitation: ${window.location.href}\n\n#JabHinalMetNikhil`
       )}`;
       window.open(waUrl, "_blank");
     }
@@ -45,16 +45,16 @@ export default function HeaderNav() {
     <header
       className={`sticky top-0 inset-x-0 w-full z-40 transition-all duration-300 ${
         scrolled
-          ? "bg-[#FFF0F3]/95 backdrop-blur-md border-b border-[#F5D5DC] shadow-sm py-2"
-          : "bg-[#FFF0F3]/90 backdrop-blur-sm border-b border-[#F8E0E5]/70 py-2.5"
+          ? "bg-[#FFF0F3] border-b border-[#F5D5DC] shadow-sm py-2"
+          : "bg-[#FFF0F3] border-b border-[#F8E0E5] py-2.5"
       }`}
     >
       {/* 100% Balanced and Centered Container */}
-      <div className="relative w-full flex items-center justify-between px-3 min-h-[32px]">
+      <div className="relative w-full flex items-center justify-between px-3.5 min-h-[34px]">
         
-        {/* Left: Intertwined HN Monogram Seal (Width: 28px) */}
+        {/* Left: Intertwined HN Monogram Seal (Width: 32px) */}
         <div 
-          className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-0.5 border border-[#D4AF37] shadow-sm flex items-center justify-center shrink-0 cursor-pointer z-10" 
+          className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-0.5 border border-[#D4AF37] shadow-xs flex items-center justify-center shrink-0 cursor-pointer z-10" 
           onClick={scrollToDate}
           title="Save the Date"
         >
@@ -62,6 +62,7 @@ export default function HeaderNav() {
             src="/images/hn-logo-gold.png"
             alt="HN"
             className="w-full h-full object-contain"
+            style={{ imageRendering: "-webkit-optimize-contrast" }}
           />
         </div>
 
@@ -77,15 +78,15 @@ export default function HeaderNav() {
           </div>
         </div>
 
-        {/* Right: 1-Click Share Button (Width: 28px - Exactly Matches Left Width) */}
+        {/* Right: 1-Click Share Button (Width: 32px - Exactly Matches Left Width) */}
         <div className="flex items-center z-10">
           <button
             onClick={handleShare}
             aria-label="Share Invitation"
-            className="w-7 h-7 rounded-full bg-white/90 hover:bg-white text-stone-700 border border-rose-200/90 shadow-xs flex items-center justify-center transition-all active:scale-95 shrink-0"
+            className="w-8 h-8 rounded-full bg-white hover:bg-rose-50 text-stone-700 border border-rose-300 shadow-xs flex items-center justify-center transition-all active:scale-95 shrink-0"
             title="Share Invitation Link"
           >
-            <Share2 className="w-3.5 h-3.5 text-gold-700" />
+            <Share2 className="w-3.5 h-3.5 text-[#7A1424]" />
           </button>
         </div>
 
