@@ -7,6 +7,7 @@ import HeroInvitation from "@/components/HeroInvitation";
 import ScratchDate from "@/components/ScratchDate";
 import InvitationText from "@/components/InvitationText";
 import TimelineSection from "@/components/TimelineSection";
+import DressCodeSection from "@/components/DressCodeSection";
 import CountdownTimer from "@/components/CountdownTimer";
 import VenueSection from "@/components/VenueSection";
 import FooterSection from "@/components/FooterSection";
@@ -68,6 +69,9 @@ export default function Home() {
 
         {/* Official 6-Ceremony Zig-Zag Timeline (Jan 24 - 26, 2027) */}
         <TimelineSection />
+
+        {/* Ceremony Dress Codes (Ganesh Bandhani & Carnival Pastel Colour Codes) */}
+        <DressCodeSection />
 
         {/* Live Countdown Timer */}
         <CountdownTimer />

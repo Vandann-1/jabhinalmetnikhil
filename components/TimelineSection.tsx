@@ -150,6 +150,56 @@ export default function TimelineSection() {
                   {event.description}
                 </p>
 
+                {/* Ganesh Pooja Bandhani Theme Highlight */}
+                {event.dressCodeDetails?.girls && (
+                  <div className="my-2.5 p-3 rounded-xl bg-rose-50/90 border-2 border-rose-200 text-stone-900 text-xs font-serif shadow-2xs">
+                    <span className="font-cinzel text-xs tracking-wider uppercase font-black text-[#7A1424] block mb-1">
+                      Theme / Attire Code
+                    </span>
+                    <div className="space-y-1 text-stone-800">
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-black text-[#7A1424]">👗 For Girls:</span>
+                        <span className="font-semibold">{event.dressCodeDetails.girls}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-black text-[#7A1424]">👔 For Boys:</span>
+                        <span className="font-semibold">{event.dressCodeDetails.boys}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Carnival Sangeet Pastel Colour Code Swatches */}
+                {event.dressCodeDetails?.palette && (
+                  <div className="my-2.5 p-3 rounded-xl bg-[#FAF6F8] border-2 border-purple-200 text-stone-900 text-xs font-serif shadow-2xs">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-cinzel text-xs tracking-wider uppercase font-black text-[#7A1424]">
+                        Theme: Pastel Colour Attire
+                      </span>
+                      <span className="text-[10px] font-serif text-stone-600 font-bold">
+                        Colour Codes
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-5 gap-1.5 pt-1">
+                      {event.dressCodeDetails.palette.map((swatch) => (
+                        <div key={swatch.name} className="flex flex-col items-center">
+                          <div
+                            style={{ backgroundColor: swatch.hex }}
+                            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-stone-300 shadow-xs"
+                            title={`${swatch.name} (${swatch.hex})`}
+                          />
+                          <span className="text-[9px] font-serif font-black text-stone-800 mt-1 text-center truncate max-w-[55px]">
+                            {swatch.name}
+                          </span>
+                          <span className="text-[8px] font-mono text-stone-500 font-bold uppercase">
+                            {swatch.hex}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Special Highlight for Wedding Procession Route */}
                 {event.specialNote && (
                   <div className="my-2.5 p-3 rounded-xl bg-amber-50 border-2 border-amber-300 text-amber-950 text-xs font-serif font-bold flex items-center gap-2 shadow-2xs">

@@ -16,6 +16,11 @@ export interface CeremonyEvent {
   venue: string;
   description: string;
   dressCodeSuggestion?: string;
+  dressCodeDetails?: {
+    girls?: string;
+    boys?: string;
+    palette?: ColorSwatch[];
+  };
   icon: "om" | "sparkles" | "music" | "sun" | "ring" | "utensils" | "heart";
   specialNote?: string;
   calendarEvent: {
@@ -163,8 +168,8 @@ export const weddingData: WeddingData = {
   },
 
   dressCode: {
-    title: "Traditional Ethnic Attire",
-    description: "We warmly invite our family and friends to celebrate with us in graceful traditional attire inspired by soft pastel tones.",
+    title: "Carnival Pastel Colour Attire",
+    description: "For the Carnival (Sangeet), we warmly invite our family and friends to celebrate with us in graceful traditional attire inspired by soft pastel tones.",
     palette: [
       { name: "Blush Rose", hex: "#F3D5D8", textDark: true },
       { name: "Sage Mint", hex: "#D3E2D5", textDark: true },
@@ -178,17 +183,21 @@ export const weddingData: WeddingData = {
   ceremonies: [
     {
       id: "ganesh-sthapana",
-      title: "1. Ganesh Sthapana",
+      title: "1. Ganesh Sthapana (Pooja)",
       subTitle: "Divine Invocations & Auspicious Beginnings",
       date: "Sunday, 24th January 2027",
       time: "09:00 AM",
       venue: "C.K. House, New Metral",
       description: "Seeking the divine blessings of Lord Ganesha for an auspicious start to all wedding ceremonies.",
-      dressCodeSuggestion: "Traditional Yellow & Mustard Outfits",
+      dressCodeSuggestion: "Theme: Bandhani dress/saree for girls and kurta with bandhani dupatta for boys",
+      dressCodeDetails: {
+        girls: "Bandhani dress / saree",
+        boys: "Kurta with bandhani dupatta",
+      },
       icon: "om",
       calendarEvent: {
         title: "Ganesh Sthapana - Hinal & Nikhil",
-        description: "Auspicious blessings and prayer ceremony",
+        description: "Auspicious blessings and prayer ceremony. Theme: Bandhani dress/saree for girls & Kurta with bandhani dupatta for boys",
         location: "C.K. House, New Metral, Khedbrahma",
         startDate: "2027-01-24T09:00:00",
         endDate: "2027-01-24T11:30:00",
@@ -238,11 +247,20 @@ export const weddingData: WeddingData = {
       time: "03:00 PM",
       venue: "Celebration Lawns, New Metral",
       description: "An exhilarating afternoon of energetic dance performances, vibrant tunes, singing, and joy.",
-      dressCodeSuggestion: "Indo-Western & Glamour Hues",
+      dressCodeSuggestion: "Theme: Pastel Colour Attire",
+      dressCodeDetails: {
+        palette: [
+          { name: "Blush Rose", hex: "#F3D5D8", textDark: true },
+          { name: "Sage Mint", hex: "#D3E2D5", textDark: true },
+          { name: "Champagne Gold", hex: "#EBDDBA", textDark: true },
+          { name: "Powder Blue", hex: "#D0DEEE", textDark: true },
+          { name: "Soft Lavender", hex: "#E3D5E8", textDark: true },
+        ],
+      },
       icon: "music",
       calendarEvent: {
         title: "Carnival (Sangeet) - Hinal & Nikhil",
-        description: "Musical carnival and dance celebration",
+        description: "Musical carnival and dance celebration. Theme: Pastel Colour Attire",
         location: "Celebration Lawns, New Metral, Khedbrahma",
         startDate: "2027-01-25T15:00:00",
         endDate: "2027-01-25T18:30:00",
