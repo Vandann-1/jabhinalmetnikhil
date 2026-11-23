@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Heart } from "lucide-react";
@@ -17,6 +17,15 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
   const [isHovered, setIsHovered] = useState(false);
   const [opening, setOpening] = useState(false);
   const [showHashtag, setShowHashtag] = useState(false);
+
+  // Reset state when envelope is re-sealed from the footer
+  useEffect(() => {
+    if (!isOpen) {
+      setOpening(false);
+      setShowHashtag(false);
+      setIsHovered(false);
+    }
+  }, [isOpen]);
 
   const handleOpenClick = () => {
     if (opening || isOpen) return;
@@ -44,25 +53,23 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
     // After animation finishes, transition to the main page
     setTimeout(() => {
       onOpen();
-    }, 2000);
+    }, 2600);
   };
 
-  if (isOpen) {
-    return null;
-  }
-
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0, scale: 0.98 }}
-        transition={{ duration: 0.8, ease: "easeInOut" }}
-        className="fixed inset-0 z-50 flex flex-col items-center justify-between envelope-paper-bg overflow-hidden select-none"
-      >
-        {/* Soft Ambient Radiance */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] rounded-full bg-gold-200/25 blur-3xl" />
-        </div>
+    <AnimatePresence mode="wait">
+      {!isOpen && (
+        <motion.div
+          key="envelope-modal"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0, scale: 0.96 }}
+          transition={{ duration: 0.85, ease: "easeInOut" }}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-between envelope-paper-bg overflow-hidden select-none"
+        >
+          {/* Soft Ambient Radiance */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] rounded-full bg-gold-200/25 blur-3xl" />
+          </div>
 
         {/* --- Top Envelope Flap (Subtle shape of envelope reaching center) --- */}
         <motion.div
@@ -282,6 +289,7 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
         </AnimatePresence>
 
       </motion.div>
-    </AnimatePresence>
+    )}
+  </AnimatePresence>
   );
 }

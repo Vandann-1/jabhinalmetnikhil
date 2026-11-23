@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Sparkles } from "lucide-react";
+import { Check } from "lucide-react";
 import { weddingData, ColorSwatch } from "@/lib/wedding-data";
 import TypewriterText from "@/components/TypewriterText";
 

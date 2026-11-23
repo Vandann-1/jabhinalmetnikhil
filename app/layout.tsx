@@ -3,6 +3,7 @@ import "./globals.css";
 import { weddingData } from "@/lib/wedding-data";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hinalxnikhil.com"),
   title: `${weddingData.couple.bride.firstName} & ${weddingData.couple.groom.firstName} - Royal Wedding Invitation`,
   description: `We cordially invite you to celebrate the wedding ceremony of ${weddingData.couple.bride.fullName} & ${weddingData.couple.groom.fullName} on ${weddingData.theDate.formattedDisplayDate}.`,
   icons: {
@@ -29,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth bg-[#FAF1E2]">
+    <html lang="en" className="bg-[#FAF1E2]">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

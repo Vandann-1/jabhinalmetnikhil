@@ -14,7 +14,7 @@ export default function ScratchDate() {
       "Hast Melap & Wedding Ceremony of Hinal & Nikhil. Procession from Galodiya to New Metral, Khedbrahma, Gujarat. #JabHinalMetNikhil"
     )}&location=${encodeURIComponent(
       weddingData.venue.fullAddress
-    )}&dates=20270126T070000Z/20270126T140000Z`;
+    )}&dates=20270126T123000/20270126T193000&ctz=Asia/Kolkata`;
 
     window.open(gCalUrl, "_blank");
   };

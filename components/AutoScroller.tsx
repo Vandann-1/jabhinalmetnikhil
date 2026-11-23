@@ -26,6 +26,9 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
     }
     lastTimeRef.current = null;
     accumulatedYRef.current = 0;
+    if (typeof document !== "undefined") {
+      document.documentElement.style.scrollBehavior = "";
+    }
   }, []);
 
   // Frame step function with subpixel accumulation for silky 60/120fps motion
@@ -64,6 +67,9 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
   // Start scrolling
   const startScrolling = useCallback(() => {
     if (isAutoScrollingRef.current) return;
+    if (typeof document !== "undefined") {
+      document.documentElement.style.scrollBehavior = "auto";
+    }
     isAutoScrollingRef.current = true;
     isPausedRef.current = false;
     lastTimeRef.current = null;
@@ -72,7 +78,7 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
     animFrameRef.current = requestAnimationFrame(scrollStep);
   }, [scrollStep]);
 
-  // Handle manual user interactions (wheel, touch, pointer)
+  // Handle manual user interactions (wheel, touch, pointer, key)
   useEffect(() => {
     const handleUserGesture = () => {
       if (isAutoScrollingRef.current) {
@@ -98,12 +104,16 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
 
     window.addEventListener("wheel", handleUserGesture, { passive: true });
     window.addEventListener("touchstart", handleUserGesture, { passive: true });
+    window.addEventListener("touchmove", handleUserGesture, { passive: true });
     window.addEventListener("pointerdown", handleUserGesture, { passive: true });
+    window.addEventListener("keydown", handleUserGesture, { passive: true });
 
     return () => {
       window.removeEventListener("wheel", handleUserGesture);
       window.removeEventListener("touchstart", handleUserGesture);
+      window.removeEventListener("touchmove", handleUserGesture);
       window.removeEventListener("pointerdown", handleUserGesture);
+      window.removeEventListener("keydown", handleUserGesture);
       if (userTouchTimeoutRef.current) {
         clearTimeout(userTouchTimeoutRef.current);
       }

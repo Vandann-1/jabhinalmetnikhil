@@ -7,6 +7,8 @@ export default function HeroInvitation() {
 
   useEffect(() => {
     if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
       videoRef.current.play().catch(() => {
         // Autoplay policy fallback
       });

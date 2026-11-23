@@ -42,15 +42,15 @@ export default function TimelineSection() {
   });
 
   const handleAddToCalendar = (event: CeremonyEvent) => {
-    const startDate = event.calendarEvent.startDate.replace(/[-:]/g, "") + "Z";
-    const endDate = event.calendarEvent.endDate.replace(/[-:]/g, "") + "Z";
+    const startDate = event.calendarEvent.startDate.replace(/[-:]/g, "");
+    const endDate = event.calendarEvent.endDate.replace(/[-:]/g, "");
     const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
       event.calendarEvent.title
     )}&details=${encodeURIComponent(
       event.calendarEvent.description + " #JabHinalMetNikhil"
     )}&location=${encodeURIComponent(
       event.calendarEvent.location
-    )}&dates=${startDate}/${endDate}`;
+    )}&dates=${startDate}/${endDate}&ctz=Asia/Kolkata`;
     window.open(gCalUrl, "_blank");
   };
 
