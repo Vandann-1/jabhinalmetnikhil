@@ -89,7 +89,10 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
           clearTimeout(userTouchTimeoutRef.current);
         }
 
-        // Gently resume "lil lil" auto-scroll after 3.5 seconds of idle
+        // If near top (hero section), pause for 4 seconds; otherwise 3.5 seconds
+        const isNearHero = window.scrollY < 120;
+        const resumeDelay = isNearHero ? 4000 : 3500;
+
         userTouchTimeoutRef.current = setTimeout(() => {
           const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
           if (window.scrollY < maxScroll - 20) {
@@ -98,7 +101,7 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
             if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
             animFrameRef.current = requestAnimationFrame(scrollStep);
           }
-        }, 3500);
+        }, resumeDelay);
       }
     };
 
@@ -123,10 +126,10 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
   // Automatically start "lil lil" auto-scroll after envelope is opened
   useEffect(() => {
     if (shouldStart) {
-      // 2.2s delay to enjoy the hero video presentation and song intro
+      // 4.0s pause for guests to enjoy the hero video presentation and song intro
       const timer = setTimeout(() => {
         startScrolling();
-      }, 2200);
+      }, 4000);
 
       return () => clearTimeout(timer);
     } else {
