@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Envelope from "@/components/Envelope";
-import HeaderNav from "@/components/HeaderNav";
 import HeroInvitation from "@/components/HeroInvitation";
 import ScratchDate from "@/components/ScratchDate";
 import InvitationText from "@/components/InvitationText";
@@ -55,9 +54,6 @@ export default function Home() {
       {/* 4. Minimal Editorial Mobile Layout (Zero bulky cards, pure flowing luxury) */}
       <div className="w-full max-w-[450px] min-h-screen bg-[#FAF1E2] relative shadow-lg overflow-x-hidden p-0 m-0 border-0">
         
-        {/* Sticky Header Navigation in Soft Pinkish Blush with #JabHinalMetNikhil (Perfect Center Alignment) */}
-        <HeaderNav />
-
         {/* Full-bleed Seamless Video Hero */}
         <HeroInvitation />
 

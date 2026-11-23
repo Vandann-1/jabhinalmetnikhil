@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 interface AutoScrollerProps {
   shouldStart?: boolean;
@@ -9,12 +9,13 @@ interface AutoScrollerProps {
 export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
   const animFrameRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number | null>(null);
+  const accumulatedYRef = useRef(0);
   const userTouchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isAutoScrollingRef = useRef(false);
-  const hasUserInteractedRef = useRef(false);
+  const isPausedRef = useRef(false);
 
-  // Auto-scroll speed in pixels per second
-  const SCROLL_SPEED = 40;
+  // "Lil lil" gentle luxury speed (~22 pixels per second for relaxed, effortless reading)
+  const SCROLL_SPEED = 22;
 
   // Stop the animation frame loop
   const stopScrolling = useCallback(() => {
@@ -24,12 +25,13 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
       animFrameRef.current = null;
     }
     lastTimeRef.current = null;
+    accumulatedYRef.current = 0;
   }, []);
 
-  // Frame step function
+  // Frame step function with subpixel accumulation for silky 60/120fps motion
   const scrollStep = useCallback(
     (timestamp: number) => {
-      if (!isAutoScrollingRef.current) return;
+      if (!isAutoScrollingRef.current || isPausedRef.current) return;
 
       if (lastTimeRef.current === null) {
         lastTimeRef.current = timestamp;
@@ -46,8 +48,13 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
         return;
       }
 
-      // Scroll smoothly
-      window.scrollBy(0, SCROLL_SPEED * dt);
+      // Subpixel float accumulator for buttery smooth slow scrolling
+      accumulatedYRef.current += SCROLL_SPEED * dt;
+      if (accumulatedYRef.current >= 1) {
+        const step = Math.floor(accumulatedYRef.current);
+        window.scrollBy(0, step);
+        accumulatedYRef.current -= step;
+      }
 
       animFrameRef.current = requestAnimationFrame(scrollStep);
     },
@@ -56,8 +63,11 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
 
   // Start scrolling
   const startScrolling = useCallback(() => {
+    if (isAutoScrollingRef.current) return;
     isAutoScrollingRef.current = true;
+    isPausedRef.current = false;
     lastTimeRef.current = null;
+    accumulatedYRef.current = 0;
     if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     animFrameRef.current = requestAnimationFrame(scrollStep);
   }, [scrollStep]);
@@ -65,22 +75,24 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
   // Handle manual user interactions (wheel, touch, pointer)
   useEffect(() => {
     const handleUserGesture = () => {
-      hasUserInteractedRef.current = true;
       if (isAutoScrollingRef.current) {
-        // Pause scrolling immediately so it never fights the user
-        stopScrolling();
+        // Temporarily pause scrolling while user is reading or dragging
+        isPausedRef.current = true;
 
         if (userTouchTimeoutRef.current) {
           clearTimeout(userTouchTimeoutRef.current);
         }
 
-        // Gently resume after 4.5 seconds of idle if user stopped touching
+        // Gently resume "lil lil" auto-scroll after 3.5 seconds of idle
         userTouchTimeoutRef.current = setTimeout(() => {
           const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-          if (window.scrollY < maxScroll - 30) {
-            startScrolling();
+          if (window.scrollY < maxScroll - 20) {
+            isPausedRef.current = false;
+            lastTimeRef.current = null;
+            if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+            animFrameRef.current = requestAnimationFrame(scrollStep);
           }
-        }, 4500);
+        }, 3500);
       }
     };
 
@@ -96,18 +108,21 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
         clearTimeout(userTouchTimeoutRef.current);
       }
     };
-  }, [startScrolling, stopScrolling]);
+  }, [scrollStep]);
 
-  // Start auto-scroll automatically after envelope unseals
+  // Automatically start "lil lil" auto-scroll after envelope is opened
   useEffect(() => {
-    if (shouldStart && !hasUserInteractedRef.current) {
+    if (shouldStart) {
+      // 2.2s delay to enjoy the hero video presentation and song intro
       const timer = setTimeout(() => {
         startScrolling();
-      }, 2500); // 2.5s delay to enjoy hero header
+      }, 2200);
 
       return () => clearTimeout(timer);
+    } else {
+      stopScrolling();
     }
-  }, [shouldStart, startScrolling]);
+  }, [shouldStart, startScrolling, stopScrolling]);
 
   // Clean up on unmount
   useEffect(() => {
@@ -117,6 +132,5 @@ export default function AutoScroller({ shouldStart }: AutoScrollerProps) {
     };
   }, [stopScrolling]);
 
-  // Completely invisible background runner - no UI clutter or floating play buttons!
   return null;
 }
