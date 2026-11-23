@@ -5,9 +5,21 @@ import { weddingData } from "@/lib/wedding-data";
 export const metadata: Metadata = {
   title: `${weddingData.couple.bride.firstName} & ${weddingData.couple.groom.firstName} - Royal Wedding Invitation`,
   description: `We cordially invite you to celebrate the wedding ceremony of ${weddingData.couple.bride.fullName} & ${weddingData.couple.groom.fullName} on ${weddingData.theDate.formattedDisplayDate}.`,
+  icons: {
+    icon: "/images/hn-royal-crest.png",
+    apple: "/images/hn-royal-crest.png",
+  },
   openGraph: {
     title: `${weddingData.couple.bride.firstName} & ${weddingData.couple.groom.firstName} • Wedding Invitation`,
     description: `Save the date for the wedding celebrations on ${weddingData.theDate.formattedDisplayDate}.`,
+    images: [
+      {
+        url: "/images/hn-royal-crest.png",
+        width: 1024,
+        height: 1024,
+        alt: "Hinal & Nikhil Royal Wedding Crest",
+      },
+    ],
   },
 };
 

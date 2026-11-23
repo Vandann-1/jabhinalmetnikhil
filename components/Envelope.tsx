@@ -153,7 +153,7 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
                 repeat: opening || isHovered ? 0 : Infinity,
                 ease: "easeInOut",
               }}
-              className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-1.5 flex items-center justify-center border-2 border-[#D4AF37] shadow-2xl"
+              className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-1.5 flex items-center justify-center border-2 border-[#D4AF37] shadow-2xl"
             >
               {/* Outer Dashed Gold Ring */}
               <div
@@ -161,12 +161,12 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
                 style={{ animationDuration: "25s" }}
               />
 
-              {/* Seal Inner Core: Features the user's exact intertwined HN Monogram */}
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-[#7A1424] via-[#5C0D1A] to-[#3B0710] flex items-center justify-center p-2 shadow-inner relative overflow-hidden">
+              {/* Seal Inner Core: Features the user's royal crest */}
+              <div className="w-full h-full rounded-full bg-[#FAF5EE] flex items-center justify-center p-2 shadow-inner relative overflow-hidden border border-gold-300">
                 <img
-                  src="/images/hn-logo-gold.png"
-                  alt="H & N Monogram"
-                  className="w-full h-full object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                  src="/images/hn-royal-crest.png"
+                  alt="H & N Royal Crest"
+                  className="w-full h-full object-contain filter drop-shadow-sm"
                 />
               </div>
 
@@ -222,20 +222,18 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-white p-6 text-center"
             >
-              {/* Auspicious Emblem */}
+              {/* Auspicious Grand Royal Crest */}
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 }}
-                className="w-16 h-16 mb-4 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-1 border-2 border-gold-400 shadow-xl"
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.15, duration: 0.6, type: "spring" }}
+                className="w-36 h-36 sm:w-44 sm:h-44 mb-3 flex items-center justify-center"
               >
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-[#7A1424] via-[#5C0D1A] to-[#3B0710] flex items-center justify-center p-2">
-                  <img
-                    src="/images/hn-logo-gold.png"
-                    alt="HN"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+                <img
+                  src="/images/hn-royal-crest.png"
+                  alt="Hinal & Nikhil"
+                  className="w-full h-full object-contain filter drop-shadow-xl"
+                />
               </motion.div>
 
               {/* Glowing Grand Hashtag: #JabHinalMetNikhil */}

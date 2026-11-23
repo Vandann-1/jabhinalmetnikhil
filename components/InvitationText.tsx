@@ -70,7 +70,22 @@ export default function InvitationText() {
         </p>
 
         {/* Bride & Groom Names */}
-        <div className="py-4 space-y-2">
+        <div className="py-2 space-y-2">
+          {/* Royal Wedding Crest */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="w-40 h-40 sm:w-48 sm:h-48 mx-auto my-1"
+          >
+            <img
+              src="/images/hn-royal-crest.png"
+              alt="Hinal & Nikhil Royal Crest"
+              className="w-full h-full object-contain filter drop-shadow-md"
+            />
+          </motion.div>
+
           <h2 className="font-cinzel text-4xl sm:text-5xl font-black text-[#7A1424] tracking-wide">
             <TypewriterText
               text={couple.bride.firstName}

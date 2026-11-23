@@ -52,15 +52,15 @@ export default function HeaderNav() {
       {/* 100% Balanced and Centered Container */}
       <div className="relative w-full flex items-center justify-between px-3.5 min-h-[34px]">
         
-        {/* Left: Intertwined HN Monogram Seal (Width: 32px) */}
+        {/* Left: Intertwined HN Royal Crest (Width: 32px) */}
         <div 
-          className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-0.5 border border-[#D4AF37] shadow-xs flex items-center justify-center shrink-0 cursor-pointer z-10" 
+          className="w-8 h-8 rounded-full bg-white p-0.5 border border-[#D4AF37] shadow-xs flex items-center justify-center shrink-0 cursor-pointer z-10 overflow-hidden" 
           onClick={scrollToDate}
           title="Save the Date"
         >
           <img
-            src="/images/hn-logo-gold.png"
-            alt="HN"
+            src="/images/hn-royal-crest.png"
+            alt="HN Royal Crest"
             className="w-full h-full object-contain"
             style={{ imageRendering: "-webkit-optimize-contrast" }}
           />

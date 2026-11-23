@@ -32,15 +32,13 @@ export default function FooterSection({ onReopenEnvelope }: FooterSectionProps) 
     <footer className="relative mt-10 pt-10 pb-20 px-6 text-center border-t border-gold-300/60 bg-[#FAF1E2]">
       <div className="max-w-xs mx-auto flex flex-col items-center">
         
-        {/* Monogram Seal */}
-        <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#681423] via-[#8C1D30] to-[#B3394E] p-1 flex items-center justify-center border-2 border-[#D4AF37] shadow-md mb-3">
-          <div className="w-full h-full rounded-full bg-gradient-to-br from-[#7A1424] via-[#5C0D1A] to-[#3B0710] flex items-center justify-center p-1.5 shadow-inner">
-            <img
-              src="/images/hn-logo-gold.png"
-              alt="HN Logo"
-              className="w-full h-full object-contain"
-            />
-          </div>
+        {/* Royal Wedding Crest */}
+        <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto flex items-center justify-center mb-3">
+          <img
+            src="/images/hn-royal-crest.png"
+            alt="Hinal & Nikhil Royal Crest"
+            className="w-full h-full object-contain filter drop-shadow-md"
+          />
         </div>
 
         <h3 className="font-cinzel text-2xl font-black text-stone-900">
