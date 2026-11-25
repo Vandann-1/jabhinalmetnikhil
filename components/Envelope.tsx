@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Heart } from "lucide-react";
-import TypewriterText from "@/components/TypewriterText";
 
 interface EnvelopeProps {
   onOpen: () => void;
@@ -42,10 +41,10 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
       });
     } catch {}
 
-    // Transition to the main page after the royal HN logo zoom and reveal
+    // Transition to the main page after the royal HN logo zoom
     setTimeout(() => {
       onOpen();
-    }, 2900);
+    }, 2400);
   };
 
   return (
@@ -117,7 +116,7 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
               </motion.div>
             </motion.div>
 
-            {/* 2. White Background Screen with Zooming HN Logo & Hashtag Reveal */}
+            {/* 2. Pure White Background Screen with Zooming HN Logo Only */}
             <AnimatePresence>
               {opening && (
                 <motion.div
@@ -128,76 +127,22 @@ export default function Envelope({ onOpen, onStartOpen, isOpen }: EnvelopeProps)
                   className="absolute inset-0 z-20 bg-white flex flex-col items-center justify-center p-6 text-center select-none overflow-hidden"
                 >
                   {/* Subtle warm golden ambient glow */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] rounded-full bg-gold-100/60 blur-3xl pointer-events-none" />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full bg-gold-100/60 blur-3xl pointer-events-none" />
 
-                  {/* Top Auspicious Inscription */}
+                  {/* Majestic HN Crest Logo Alone with Zoom Animation */}
                   <motion.div
-                    initial={{ opacity: 0, y: -12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15, duration: 0.5 }}
-                    className="mb-2"
-                  >
-                    <span className="text-gold-800 text-[11px] font-serif font-bold tracking-[0.3em] uppercase">
-                      || શ્રી ગણેશાય નમઃ ||
-                    </span>
-                  </motion.div>
-
-                  {/* Majestic HN Logo with Zoom Animation */}
-                  <motion.div
-                    initial={{ scale: 0.15, opacity: 0, rotate: -4 }}
-                    animate={{ scale: [0.15, 1.15, 1], opacity: 1, rotate: 0 }}
-                    transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-44 h-44 sm:w-52 sm:h-52 relative flex items-center justify-center my-2"
+                    initial={{ scale: 0.15, opacity: 0 }}
+                    animate={{ scale: [0.15, 1.12, 1], opacity: 1 }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-64 h-64 sm:w-76 sm:h-76 relative flex items-center justify-center"
                   >
                     <img
                       src="/images/hn-royal-crest.png"
                       alt="Hinal & Nikhil Royal Crest"
-                      className="w-full h-full object-contain filter drop-shadow-xl"
+                      className="w-full h-full object-contain filter drop-shadow-2xl"
                     />
                     {/* Golden halo glow behind the crest */}
-                    <div className="absolute inset-0 rounded-full bg-gold-300/30 blur-2xl -z-10" />
-                  </motion.div>
-
-                  {/* Glowing Grand Hashtag: #JabHinalMetNikhil */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.6 }}
-                    className="relative mt-2"
-                  >
-                    <TypewriterText
-                      text="#JabHinalMetNikhil"
-                      speed={0.04}
-                      delay={0.25}
-                      showCursor={true}
-                      className="font-cinzel text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#7A1424] via-[#B8860B] to-[#7A1424] tracking-tight drop-shadow-sm"
-                    />
-
-                    {/* Golden Shimmer Underline */}
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: "140px" }}
-                      transition={{ delay: 0.5, duration: 0.7 }}
-                      className="h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mt-2.5 mb-3"
-                    />
-                  </motion.div>
-
-                  {/* Couple Names & Blessings */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.55, duration: 0.6 }}
-                    className="space-y-1"
-                  >
-                    <h2 className="font-cinzel text-xl sm:text-2xl font-black text-stone-900 tracking-wide">
-                      Hinal &amp; Nikhil
-                    </h2>
-                    <p className="font-serif italic text-xs sm:text-sm text-stone-600 max-w-xs mx-auto">
-                      A love story blessed by divine grace &amp; sacred traditions
-                    </p>
-                    <p className="font-cinzel text-[11px] sm:text-xs uppercase tracking-[0.25em] text-gold-900 font-bold pt-1.5">
-                      Tuesday, 26th January 2027 • New Metral
-                    </p>
+                    <div className="absolute inset-0 rounded-full bg-gold-300/35 blur-3xl -z-10" />
                   </motion.div>
                 </motion.div>
               )}
