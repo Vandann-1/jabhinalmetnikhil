@@ -136,9 +136,9 @@ export const weddingData: WeddingData = {
     monogram: "H & N",
     hashtag: "#JabHinalMetNikhil",
     auspiciousSymbol: "|| श्री गणेशाय नमः ||",
-    tagline: "cordially invite you to the wedding of their daughter",
+    tagline: "cordially invite you to the wedding of our daughter",
     gujaratiBlessing: "સ્નેહાધીન (Yours Affectionately)",
-    familyGreeting: "Shri Rakeshbhai Chhaganlal Darji and Smt. Nitaben Rakeshbhai Darji cordially invite you and your family to grace the auspicious wedding ceremonies of their beloved daughter Hinal with Nikhil (Son of Shri Mukeshbhai Manilal Rathod and Smt. Induben Mukeshbhai Rathod).",
+    familyGreeting: "Shri Rakeshbhai Chhaganlal Darji and Smt. Nitaben Rakeshbhai Darji cordially invite you and your family to grace the auspicious wedding ceremonies of our beloved daughter Hinal with Nikhil (Son of Shri Mukeshbhai Manilal Rathod and Smt. Induben Mukeshbhai Rathod).",
   },
 
   theDate: {

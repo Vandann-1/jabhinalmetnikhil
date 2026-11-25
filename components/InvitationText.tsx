@@ -63,7 +63,7 @@ export default function InvitationText() {
         {/* Cordial Invitation Text */}
         <p className="text-stone-600 text-xs font-serif tracking-[0.2em] uppercase max-w-sm mx-auto leading-relaxed font-semibold">
           <TypewriterText
-            text="cordially invite your gracious presence & blessings to celebrate the wedding of their daughter"
+            text="cordially invite your gracious presence & blessings to celebrate the wedding of our daughter"
             speed={0.02}
             delay={0.2}
           />
@@ -116,22 +116,22 @@ export default function InvitationText() {
             />
           </h2>
 
-          {/* Groom's Parents Lineage */}
-          <div className="pt-2 space-y-0.5">
-            <p className="text-xs font-serif text-gold-900 font-bold tracking-wide">
+          {/* Groom's Parents Lineage - Matching Bride's Parents Font Size */}
+          <div className="pt-2 space-y-1">
+            <h3 className="font-serif text-lg sm:text-xl font-bold text-stone-900">
               <TypewriterText
                 text={`Son of ${couple.groom.fatherName}`}
-                speed={0.025}
+                speed={0.03}
                 delay={0.2}
               />
-            </p>
-            <p className="text-xs font-serif text-gold-900 font-bold tracking-wide">
+            </h3>
+            <h3 className="font-serif text-base sm:text-lg font-semibold text-stone-800">
               <TypewriterText
                 text={`& ${couple.groom.motherName}`}
-                speed={0.025}
+                speed={0.03}
                 delay={0.35}
               />
-            </p>
+            </h3>
           </div>
         </div>
 
