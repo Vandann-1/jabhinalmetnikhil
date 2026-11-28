@@ -4,9 +4,16 @@
 
 @layer base {
   :root {
+    color-scheme: light only;
+    supported-color-schemes: light;
     --background: #FAF1E2;
     --foreground: #2C2523;
   }
+}
+
+html {
+  color-scheme: light only;
+  supported-color-schemes: light;
 }
 
 html, body {

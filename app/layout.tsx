@@ -1,6 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { weddingData } from "@/lib/wedding-data";
+
+export const viewport: Viewport = {
+  themeColor: "#FAF1E2",
+  colorScheme: "light",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jabhinalmetnikhil.vercel.app"),
@@ -50,8 +55,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-[#FAF1E2]">
+    <html lang="en" className="bg-[#FAF1E2]" style={{ colorScheme: "light" }}>
       <head>
+        {/* Strictly enforce Light / White theme across all browsers and devices */}
+        <meta name="color-scheme" content="light only" />
+        <meta name="supported-color-schemes" content="light" />
+        <meta name="theme-color" content="#FAF1E2" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
