@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Heart, Share2, RotateCcw } from "lucide-react";
+import { Heart, RotateCcw } from "lucide-react";
 import { weddingData } from "@/lib/wedding-data";
 
 interface FooterSectionProps {
@@ -10,23 +10,6 @@ interface FooterSectionProps {
 
 export default function FooterSection({ onReopenEnvelope }: FooterSectionProps) {
   const { couple } = weddingData;
-
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: `Wedding of ${couple.bride.firstName} & ${couple.groom.firstName}`,
-          text: `You're cordially invited to celebrate the wedding of ${couple.bride.firstName} & ${couple.groom.firstName}! #JabHinalMetNikhil`,
-          url: window.location.href,
-        })
-        .catch(() => {});
-    } else {
-      const waUrl = `https://wa.me/?text=${encodeURIComponent(
-        `Join us in celebrating the wedding of ${couple.bride.firstName} & ${couple.groom.firstName}! 💍✨\n\nView the digital invitation: ${window.location.href}\n\n#JabHinalMetNikhil`
-      )}`;
-      window.open(waUrl, "_blank");
-    }
-  };
 
   return (
     <footer className="relative mt-10 pt-10 pb-20 px-6 text-center border-t border-gold-300/60 bg-[#FAF1E2]">
@@ -54,16 +37,8 @@ export default function FooterSection({ onReopenEnvelope }: FooterSectionProps) 
           &ldquo;With gratitude in our hearts, we eagerly await your gracious presence to bless our new beginning.&rdquo;
         </p>
 
-        {/* Minimal Action Buttons */}
-        <div className="flex flex-col w-full gap-2.5 mb-6">
-          <button
-            onClick={handleShare}
-            className="w-full py-2.5 rounded-full bg-gold-600 hover:bg-gold-700 text-white font-serif text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-1.5 active:scale-95"
-          >
-            <Share2 className="w-3.5 h-3.5" />
-            <span>Share Invitation Link</span>
-          </button>
-
+        {/* Action Button */}
+        <div className="w-full mb-6">
           <button
             onClick={onReopenEnvelope}
             className="w-full py-2.5 rounded-full bg-white/80 hover:bg-white text-stone-700 border border-gold-300 font-serif text-xs font-semibold transition-all shadow-sm flex items-center justify-center gap-1.5"
